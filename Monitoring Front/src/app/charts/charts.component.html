@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <app-nav-bar *ngIf="userService.roleMatch(['ADMIN'])"></app-nav-bar>
+    </div>
+    <div class="col-md-10">
+      <select class="form-control" (change)="onOptionSelected($event)">
+        <option selected>Options...</option>
+        <option>Nombre de tickets par EDS</option>
+        <option>Nombre de tickets par développeur</option>
+        <option>Rapport</option>
+      </select>
+
+      <div
+        class="charts"
+        *ngIf="
+          selectedOption !== 'Nombre de tickets par développeur' &&
+          selectedOption !== 'Rapport'
+        "
+      >
+        <canvas id="myChart" #myChart></canvas>
+        <button (click)="download()" class="btn btn-info">Imprimer</button>
+      </div>
+      <div
+        class="charts"
+        *ngIf="
+          selectedOption !== 'Nombre de tickets par EDS' &&
+          selectedOption !== 'Rapport'
+        "
+      >
+        <canvas id="ChartDev" #ChartDev></canvas>
+        <button type="button" (click)="downloadChart()" class="btn btn-info">
+          Imprimer
+        </button>
+      </div>
+      <div
+        class="charts"
+        *ngIf="
+          selectedOption !== 'Nombre de tickets par développeur' &&
+          selectedOption !== 'Nombre de tickets par EDS'
+        "
+      >
+        <canvas id="ChartSemester" #ChartSemester></canvas>
+        <button type="button" (click)="downloadChart3()" class="btn btn-info">
+          Imprimer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

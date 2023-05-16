@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-3 sidebar" [ngClass]="{ open: isSidebarOpen }">
+    <img
+      src="https://www.dimajadid.com/wp-content/uploads/2021/12/Sofrecom.jpg"
+      alt=""
+    />
+    <nav class="navbar navbar-expand-md sidebar-menu">
+      <div class="navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin">Acceuil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/assignedTickets"
+              >Tickets affectés</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/charts">Statistiques</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/manageUsers"
+              >Gérer les utilisateurs</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="col-md-9">
+    <router-outlet></router-outlet>
+  </div>
+</div>

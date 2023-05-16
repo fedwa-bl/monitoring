@@ -1,0 +1,12 @@
+2023-04-21 17:56:36,813 [Worker-7: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2023-04-21 18:14:06,647 [Worker-24: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.monitoringApp:monitoringApp:0.0.1-SNAPSHOT @ C:\Users\aouyaaz\Desktop\Project\Monitoring Back\monitoring_tickets_incidents\pom.xml.
+2023-04-21 18:14:24,011 [Worker-24: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-21 18:14:24,051 [Worker-24: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2023-04-21 18:14:24,068 [Worker-24: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2023-04-21 18:14:24,072 [Worker-24: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-21 18:14:24,073 [Worker-24: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\aouyaaz\Desktop\Project\Monitoring Back\monitoring_tickets_incidents\src\test\resources
+2023-04-21 18:14:26,503 [Worker-30: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-21 18:14:26,506 [Worker-30: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2023-04-21 18:14:26,511 [Worker-30: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2023-04-21 18:14:26,514 [Worker-30: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2023-04-21 18:14:26,514 [Worker-30: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\aouyaaz\Desktop\Project\Monitoring Back\monitoring_tickets_incidents\src\test\resources

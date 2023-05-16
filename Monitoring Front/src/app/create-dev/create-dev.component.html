@@ -1,0 +1,124 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <app-nav-bar *ngIf="userService.roleMatch(['ADMIN'])"></app-nav-bar>
+    </div>
+    <div class="col-md-9">
+      <mat-card>
+        <h3>Créer un compte:</h3>
+        <form (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col">
+              <label>Nom:</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Nom"
+                id="nom"
+                [(ngModel)]="dev.nom"
+                name="nom"
+                required
+              />
+            </div>
+            <div class="invalid-feedback" *ngIf="nomErrorMessage">
+              {{ nomErrorMessage }}
+            </div>
+            <div class="col">
+              <label>Prénom:</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Prénom"
+                id="prenom"
+                [(ngModel)]="dev.prenom"
+                name="prenom"
+                required
+              />
+            </div>
+            <div class="invalid-feedback" *ngIf="prenomErrorMessage">
+              {{ prenomErrorMessage }}
+            </div>
+            <div class="col">
+              <label>Username:</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="username"
+                id="username"
+                [(ngModel)]="dev.username"
+                name="username"
+                required
+              />
+            </div>
+            <div class="invalid-feedback" *ngIf="usernameErrorMessage">
+              {{ usernameErrorMessage }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label>N° Téléphone:</label>
+              <input
+                type="tel"
+                class="form-control"
+                placeholder="N° Téléphone"
+                id="tele"
+                [(ngModel)]="dev.tele"
+                name="tele"
+              />
+            </div>
+            <div class="invalid-feedback" *ngIf="teleErrorMessage">
+              {{ teleErrorMessage }}
+            </div>
+            <div class="col">
+              <label>Email:</label>
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Email"
+                id="email"
+                [(ngModel)]="dev.email"
+                name="email"
+              />
+            </div>
+            <div class="invalid-feedback" *ngIf="emailErrorMessage">
+              {{ emailErrorMessage }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label>CUID:</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="CUID"
+                id="cuid"
+                [(ngModel)]="dev.matrDev"
+                name="cuid"
+              />
+            </div>
+            <div class="invalid-feedback" *ngIf="cuidErrorMessage">
+              {{ cuidErrorMessage }}
+            </div>
+            <div class="col">
+              <label>Mot de passe:</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Mot de passe"
+                id="pwd"
+                [(ngModel)]="dev.password"
+                name="password"
+              />
+            </div>
+            <div class="invalid-feedback" *ngIf="passwordErrorMessage">
+              {{ passwordErrorMessage }}
+            </div>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-outline-dark">Céer</button>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+</div>

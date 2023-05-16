@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <app-nav-bar *ngIf="userService.roleMatch(['ADMIN'])"></app-nav-bar>
+    </div>
+    <div class="col-md-10">
+      <div class="card">
+        <h3>Liste des developpeurs</h3>
+        <div class="card-header">
+          <a class="btn btn-outline-success" routerLink="create"
+            >Nouveau Compte</a
+          >
+          <form class="example-form">
+            <mat-form-field class="example-full-width">
+              <mat-label>Entrez un cuid</mat-label>
+              <input
+                matInput
+                name="cuid"
+                [(ngModel)]="cuid"
+                (keydown.enter)="searchDev()"
+              />
+            </mat-form-field>
+          </form>
+        </div>
+        <div class="card-body">
+          <table datatable class="table table-bordered">
+            <thead class="bg-dark text-white">
+              <tr>
+                <td (click)="sortBy('cuid')">
+                  CUID <i class="fa fa-sort" aria-hidden="true"></i>
+                </td>
+                <td (click)="sortBy('nom')">
+                  Nom <i class="fa fa-sort" aria-hidden="true"></i>
+                </td>
+                <td (click)="sortBy('prenom')">
+                  Prénom <i class="fa fa-sort" aria-hidden="true"></i>
+                </td>
+                <td (click)="sortBy('username')">
+                  Username <i class="fa fa-sort" aria-hidden="true"></i>
+                </td>
+                <td (click)="sortBy('nb_tickets_assignes')">
+                  Tickets traités
+                  <i class="fa fa-sort" aria-hidden="true"></i>
+                </td>
+
+                <td (click)="sortBy('email')">
+                  Email <i class="fa fa-sort" aria-hidden="true"></i>
+                </td>
+                <td (click)="sortBy('status')">Status</td>
+                <td>Action</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="
+                  let item of devs
+                    | paginate : { itemsPerPage: pageSize, currentPage: page }
+                "
+              >
+                <td>{{ item.matrDev }}</td>
+                <td>{{ item.nom }}</td>
+                <td>{{ item.prenom }}</td>
+                <td>{{ item.username }}</td>
+                <td>{{ item.nb_tickets_assignes }}</td>
+                <td>{{ item.email }}</td>
+                <td
+                  [ngClass]="{
+                    'text-success': item.active,
+                    'text-danger': !item.active
+                  }"
+                >
+                  {{ item.active ? "Activé" : "Non Activé" }}
+                </td>
+
+                <td>
+                  <a
+                    class="btn btn-outline-primary"
+                    (click)="onUpdate(item.matrDev)"
+                    >Modifier</a
+                  >
+                  <a class="btn btn-outline-danger" (click)="onDelete(item)"
+                    >Supprimer</a
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pagination-container">
+            <pagination-controls
+              (pageChange)="page = $event"
+            ></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+h3 {
+  padding: 25px;
+}
+.card {
+  margin-bottom: 3%;
+  margin-top: 3%;
+}
+.resolved-badge {
+  background-color: #28a745;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  border-radius: 0.25rem;
+  text-align: center;
+}
+
+.open-badge {
+  background-color: #007bff;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  border-radius: 0.25rem;
+  text-align: center;
+}
+
+.canceled-badge {
+  background-color: #dc3545;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  border-radius: 0.25rem;
+  text-align: center;
+}
+.pending-badge {
+  background-color: #ffc107;
+  color: #212529;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  border-radius: 0.25rem;
+  text-align: center;
+}

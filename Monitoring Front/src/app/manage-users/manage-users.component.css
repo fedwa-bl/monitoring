@@ -1,0 +1,19 @@
+.example-form {
+  width: 70%;
+}
+
+.example-full-width {
+  float: right;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn {
+  margin-right: 10px;
+}
+h3 {
+  padding: 25px;
+}

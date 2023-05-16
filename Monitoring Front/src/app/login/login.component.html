@@ -1,0 +1,34 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <div class="alert alert-warning" *ngIf="invalidLogin">
+      {{ errorMessage }}
+    </div>
+    <div class="alert alert-success" *ngIf="loginSuccess">
+      {{ successMessage }}
+    </div>
+    <!-- Tabs Titles -->
+    <h3>Login</h3>
+
+    <!-- Login Form -->
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+      <input
+        type="text"
+        id="username"
+        class="fadeIn second"
+        ngModel
+        name="username"
+        placeholder="username"
+      />
+
+      <input
+        type="password"
+        id="password"
+        class="fadeIn third"
+        ngModel
+        name="password"
+        placeholder="password"
+      />
+      <input type="submit" class="fadeIn fourth" value="Connexion" />
+    </form>
+  </div>
+</div>

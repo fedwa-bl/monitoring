@@ -1,0 +1,14 @@
+.container{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+  
+  .container form > * {
+    margin: 12px 0;
+  }
+
+  button{
+    width: 35%;
+    margin: 0 auto;
+    display: block;
+  }

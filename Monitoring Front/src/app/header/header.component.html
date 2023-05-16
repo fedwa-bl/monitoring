@@ -1,0 +1,47 @@
+<nav
+  [ngClass]="{
+    content:
+      userService.roleMatch(['ADMIN']) || userService.roleMatch(['DEVELOPER'])
+  }"
+>
+  <div class="">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <!--<li class="nav-item">
+                <a class="nav-link active" aria-current="page" routerLink="/home">Accueil</a>
+            </li>-->
+      <li class="navbar-nav ml-auto" id="adminDashBoard">
+        <a
+          class="nav-link active"
+          aria-current="page"
+          routerLink="/admin"
+          *ngIf="userService.roleMatch(['ADMIN'])"
+          ><b>Tableau de bord Administrateur </b>
+          <p>
+            <span *ngIf="isLoggedIn()">{{ username | uppercase }}</span>
+          </p></a
+        >
+      </li>
+      <li class="nav-item" id="developerDashBoard">
+        <a
+          class="nav-link active"
+          aria-current="page"
+          routerLink="/developer"
+          *ngIf="userService.roleMatch(['DEVELOPER'])"
+          ><b>Tableau de bord Développeur</b>
+          <p>
+            <span *ngIf="isLoggedIn()">{{ username | uppercase }}</span>
+          </p>
+        </a>
+      </li>
+    </ul>
+    <button
+      *ngIf="isLoggedIn()"
+      type="button"
+      id="logout"
+      class="btn"
+      (click)="logout()"
+    >
+      Déconnexion
+    </button>
+  </div>
+</nav>

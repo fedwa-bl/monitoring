@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <app-nav-bar *ngIf="userService.roleMatch(['ADMIN'])"></app-nav-bar>
+    </div>
+    <div class="col-md-9">
+      <mat-card>
+        <div class="card-header">
+          <h3>Affecter un ticket:</h3>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col">
+                <label>ID_Ticket</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  disabled
+                  id="id_ticket"
+                  name="id_ticket"
+                  [(ngModel)]="ticket.id_ticket"
+                />
+              </div>
+              <div class="col">
+                <label>Développeur</label>
+                <select
+                  id="inputState"
+                  class="form-control"
+                  (change)="onDeveloperSelected($event)"
+                >
+                  <option selected>Username...</option>
+                  <option *ngFor="let dev of devs">
+                    {{ dev.username }}
+                  </option>
+                </select>
+                <label>CUID</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  disabled
+                  id="matr"
+                  name="matr"
+                  [(ngModel)]="selectedDevMatr"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field appearance="fill">
+                  <mat-label>Date début</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="picker"
+                    disabled
+                    [value]="ticket.date_creation"
+                  />
+                  <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field appearance="fill">
+                  <mat-label>Date fin</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="picker"
+                    disabled
+                    [value]="ticket.date_fin"
+                  />
+                  <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-outline-dark">
+                Affecter
+              </button>
+            </div>
+          </form>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

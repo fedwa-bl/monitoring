@@ -1,0 +1,33 @@
+#myChart {
+  box-sizing: border-box;
+  height: 400px;
+  width: 650px;
+}
+button {
+  margin-left: 30px;
+  margin-bottom: 15px;
+  color: white;
+}
+#ChartDev {
+  box-sizing: border-box;
+  height: 400px;
+  width: 650px;
+}
+#ChartSemester {
+  box-sizing: border-box;
+  height: 400px;
+  width: 650px;
+}
+.charts {
+  display: inline-block;
+  margin-left: 20px;
+  margin-top: 15px;
+  border-bottom: 1px solid black;
+}
+.form-control {
+  width: 30%;
+  margin-left: 205px;
+}
+.container {
+  margin-top: 10px;
+}
