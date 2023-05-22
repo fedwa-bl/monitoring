@@ -65,6 +65,12 @@ export class AdminService {
   public assignTicket(input: any) {
     return this.httpClient.post(this.apiUrl + '/assign', input);
   }
+  public reAssignTicket(input: any) {
+    return this.httpClient.post(this.apiUrl + '/reAssign', input);
+  }
+  public getActiveUsernames(id: number) {
+    return this.httpClient.get(this.apiUrl + '/usernames/' + id);
+  }
   public getEds() {
     return this.httpClient.get(this.apiUrl + '/eds');
   }
@@ -77,8 +83,9 @@ export class AdminService {
       params,
     });
   }
-  public getTicketsCountByDev(username: string) {
-    const params = new HttpParams().set('username', username);
+  public getTicketsCountByDev(username: string, status: string) {
+    let params = new HttpParams().set('username', username);
+    params = params.set('status', status);
     return this.httpClient.get<number>(`${this.apiUrl}/tickets/countDev`, {
       params,
     });

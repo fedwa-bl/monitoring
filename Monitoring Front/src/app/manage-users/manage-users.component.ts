@@ -95,4 +95,7 @@ export class ManageUsersComponent implements OnInit {
   onUpdate(cuid: number) {
     this.router.navigate(['manageUsers', 'update', cuid]);
   }
+  onDetails(cuid: string) {
+    this.router.navigate(['manageUsers', 'details', cuid]);
+  }
 }

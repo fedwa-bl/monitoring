@@ -1,41 +1,49 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Developpeur } from '../entities/developpeur';
 import { Ticket } from '../entities/Ticket';
 import { AdminService } from '../_services/admin.service';
-import { DevService } from '../_services/dev.service';
 import { UserService } from '../_services/user.service';
+import { DevService } from '../_services/dev.service';
+import { Developpeur } from '../entities/developpeur';
 
 @Component({
-  selector: 'app-assign-tickets',
-  templateUrl: './assign-tickets.component.html',
-  styleUrls: ['./assign-tickets.component.css'],
+  selector: 'app-re-assign',
+  templateUrl: './re-assign.component.html',
+  styleUrls: ['./re-assign.component.css'],
 })
-export class AssignTicketsComponent implements OnInit {
+export class ReAssignComponent implements OnInit {
   ticket!: Ticket;
   devs!: any;
-  dev!: Developpeur;
-  id_ticket!: number;
-  selectedDevMatr = '';
   input: any;
   response: any;
+  selectedDevMatr = '';
+  dev!: Developpeur;
   durationInMillis: any;
   durationInDays: any;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private adminService: AdminService,
+    public userService: UserService,
     private devService: DevService,
-    public userService: UserService
+    private router: Router
   ) {}
-
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.onGetActiveDevs(id);
     this.onGetId(id);
-    this.onGetActiveDevs();
   }
-
+  onGetActiveDevs(id: number) {
+    this.adminService.getActiveUsernames(id).subscribe(
+      (data) => {
+        this.devs = data as Developpeur;
+        console.log('<<<<<<<<', this.devs);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
   onGetId(id: number) {
     this.adminService.getTicketById(id).subscribe(
       (data) => {
@@ -52,16 +60,7 @@ export class AssignTicketsComponent implements OnInit {
       }
     );
   }
-  onGetActiveDevs() {
-    this.devService.getActiveDevs().subscribe(
-      (data) => {
-        this.devs = data as Developpeur;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }
+
   onDeveloperSelected(event: Event) {
     const target = event.target as HTMLInputElement;
     const selectedDev = target.value;
@@ -86,12 +85,12 @@ export class AssignTicketsComponent implements OnInit {
     if (!this.input.matrDev) {
       alert('Il faut choisir un développeur!');
     } else {
-      this.adminService.assignTicket(this.input).subscribe((res) => {
+      this.adminService.reAssignTicket(this.input).subscribe((res) => {
         this.response = res;
         this.sendEmail();
         location.reload();
       });
-      this.router.navigate(['/admin']);
+      //this.router.navigate(['/admin']);
     }
   }
   sendEmail() {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Ticket } from '../entities/Ticket';
 import { AdminService } from '../_services/admin.service';
 import { UserService } from '../_services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tickets-assignes',
@@ -15,7 +16,8 @@ export class TicketsAssignesComponent implements OnInit {
   key: string = '';
   constructor(
     private adminService: AdminService,
-    public userService: UserService
+    public userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -30,5 +32,8 @@ export class TicketsAssignesComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+  reAssign(id: number) {
+    this.router.navigate(['/reAssign', id]);
   }
 }

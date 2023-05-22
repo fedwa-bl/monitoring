@@ -27,11 +27,12 @@ public class Ticket {
 	@Column(nullable = false)
 	private Criticite criticite;
 	private String description;
+	private int durée=15;
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private Status status;
-	private Date date_creation;
-	private Date date_fin;
+	private Date date_creation=new Date(System.currentTimeMillis());
+	private Date date_fin=new Date(System.currentTimeMillis() + 15 * 24 * 60 * 60 * 1000);
 	@ManyToOne
 	private Developpeur developpeur;
 	@ManyToOne Admin admin;
@@ -49,36 +50,12 @@ public class Ticket {
 	}
 	public Ticket() {
 	}
-	public Ticket(Criticite criticite, String description, Status status, Date date_creation,
-			Date date_fin, Developpeur developpeur, Application application) {
+	public Ticket(Criticite criticite, String description, Status status) {
 		this.criticite = criticite;
 		this.description = description;
 		this.status = status;
-		this.date_creation = date_creation;
-		this.date_fin = date_fin;
-		this.developpeur = developpeur;
-		this.application = application;
 	}
 	
-	
-	public Ticket(Criticite criticite, String description, Status status, Date date_creation, Date date_fin,
-			Application application) {
-		super();
-		this.criticite = criticite;
-		this.description = description;
-		this.status = status;
-		this.date_creation = date_creation;
-		this.date_fin = date_fin;
-		this.application = application;
-	}
-	public Ticket(Criticite criticite, String description, Status status, Date date_creation, Date date_fin) {
-		super();
-		this.criticite = criticite;
-		this.description = description;
-		this.status = status;
-		this.date_creation = date_creation;
-		this.date_fin = date_fin;
-	}
 	public Criticite getCriticite() {
 		return criticite;
 	}
@@ -133,8 +110,16 @@ public class Ticket {
 	public void setApplication(Application application) {
 		this.application = application;
 	}
+	
+	public int getDurée() {
+		return durée;
+	}
+	public void setDurée(int durée) {
+		this.durée = durée;
+	}
+
 	public enum Status{
-		EN_ATTENTE,RÉSOLU, OUVERT, ANNULÉ
+		EN_ATTENTE,RÉSOLU,EN_COURS, OUVERT, ANNULÉ
 	}
 	public enum Criticite{
 		URGENT,CRITIQUE,NORMAL,NON_URGENT

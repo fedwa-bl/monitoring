@@ -6,8 +6,9 @@
     <div class="col-md-9">
       <mat-card>
         <div class="card-header">
-          <h3>Affecter un ticket:</h3>
+          <h3>Réaffecter un ticket:</h3>
           <h5>Durée par défaut: {{ ticket["durée"] }} Jours</h5>
+          <h5>Il reste {{ durationInDays }} Jours</h5>
         </div>
         <div class="card-body">
           <form (ngSubmit)="onSubmit()">
@@ -91,7 +92,7 @@
             </div>
             <div class="col-auto">
               <button type="submit" class="btn btn-outline-dark">
-                Affecter
+                Réaffecter
               </button>
             </div>
           </form>

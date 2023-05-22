@@ -1,5 +1,6 @@
 package com.monitoring.app.services;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.monitoring.app.entities.Admin;
 import com.monitoring.app.entities.Developpeur;
-import com.monitoring.app.entities.Eds;
 import com.monitoring.app.entities.Ticket;
+import com.monitoring.app.entities.Ticket.Criticite;
 import com.monitoring.app.entities.Ticket.Status;
 import com.monitoring.app.repositories.AdminRepo;
 import com.monitoring.app.repositories.DeveloppeurRepo;
@@ -33,7 +34,6 @@ public AdminServiceImp(DeveloppeurRepo developpeurRepo,AdminRepo adminRepo,Ticke
 
 	@Override
 	public Developpeur ajouterDev(Developpeur dev) {
-		System.out.println(">>>> "+dev);
 		return developpeurRepo.save(dev);
 	}
 	
@@ -84,6 +84,18 @@ public AdminServiceImp(DeveloppeurRepo developpeurRepo,AdminRepo adminRepo,Ticke
 	//test
 	@Override
 	public Ticket ajouterTicket(Ticket ticket) {
+		if(ticket.getCriticite()==Criticite.URGENT) {
+			ticket.setDurée(4);
+			ticket.setDate_fin(new Date(System.currentTimeMillis() + ticket.getDurée() * 24 * 60 * 60 * 1000));
+		}
+		else if(ticket.getCriticite()==Criticite.CRITIQUE) {
+			ticket.setDurée(7);
+			ticket.setDate_fin(new Date(System.currentTimeMillis() + ticket.getDurée() * 24 * 60 * 60 * 1000));
+		}
+		else if(ticket.getCriticite()==Criticite.NORMAL) {
+			ticket.setDurée(10);
+			ticket.setDate_fin(new Date(System.currentTimeMillis() + ticket.getDurée() * 24 * 60 * 60 * 1000));
+		}
 		return ticketRepo.save(ticket);
 	}
 
@@ -136,6 +148,25 @@ public AdminServiceImp(DeveloppeurRepo developpeurRepo,AdminRepo adminRepo,Ticke
 	@Override
 	public List<String> getEds() {
 		return  (List<String>) edsRepo.findEds();
+	}
+
+	@Override
+	public Ticket reAssignDev(Developpeur dev, Long id) {
+		try {
+			Ticket ticket = ticketRepo.findById(id).get();
+			Long oldDevId =ticketRepo.findById(id).get().getDeveloppeur().getId();
+			if(ticket == null) {
+				return null;
+			}
+			ticket.setDeveloppeur(dev);
+			ticket.setStatus(Status.OUVERT);
+			dev.setNb_tickets_assignes(dev.getNb_tickets_assignes()+1);
+			ticket.setDate_creation(new Date(System.currentTimeMillis()));
+			return ticketRepo.save(ticket);
+			
+		}catch(Exception e) {
+			return null;
+		}
 	}
 
 

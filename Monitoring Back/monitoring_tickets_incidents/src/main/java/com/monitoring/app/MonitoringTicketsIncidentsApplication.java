@@ -1,6 +1,5 @@
 package com.monitoring.app;
 
-import java.sql.Date;
 import java.util.ArrayList;
 
 import org.springframework.boot.CommandLineRunner;
@@ -56,7 +55,7 @@ public class MonitoringTicketsIncidentsApplication {
 			accountService.addRoleToUser("dev1","DEVELOPER");
 			accountService.addRoleToUser("MedAlaoui","DEVELOPER");
 			
-        	Admin admin=new Admin("super","admin", "Matr_Admin", "064989054", "superUser","root", "admin@sofrecom.com", true, new ArrayList<>());
+        	Admin admin=new Admin("BOULEKHRAS","Fadwa", "Matr_Admin", "064989054", "superUser","root", "admin@sofrecom.com", true, new ArrayList<>());
         	accountService.addNewUser(admin);
         	accountService.addRoleToUser("superUser","ADMIN");
 			//ajouter des applications
@@ -78,22 +77,22 @@ public class MonitoringTicketsIncidentsApplication {
         	cr.save(c2);
         	//ajouter des tickets
         
-        	Ticket ticket1=new Ticket(Criticite.URGENT, "this is a test", Status.EN_ATTENTE,new Date(System.currentTimeMillis()) ,new Date(System.currentTimeMillis() + 15 * 24 * 60 * 60 * 1000) );
+        	Ticket ticket1=new Ticket(Criticite.URGENT, "this is a test", Status.EN_ATTENTE );
         	ticket1.setApplication(application1);
         	ticket1.setAdmin(admin);
         	ticket1.setClient(c1);
         	adminService.ajouterTicket(ticket1);
-        	Ticket ticket2=new Ticket(Criticite.CRITIQUE, "this is a test", Status.EN_ATTENTE,new Date(System.currentTimeMillis()) ,new Date(System.currentTimeMillis() + 15 * 24 * 60 * 60 * 1000) );
+        	Ticket ticket2=new Ticket(Criticite.CRITIQUE, "this is a test", Status.EN_ATTENTE );
         	ticket2.setApplication(application1);
         	ticket2.setAdmin(admin);
         	ticket2.setClient(c2);
         	adminService.ajouterTicket(ticket2);
-        	Ticket ticket3=new Ticket(Criticite.NORMAL, "this is a test", Status.EN_ATTENTE,new Date(System.currentTimeMillis()) ,new Date(System.currentTimeMillis() + 15 * 24 * 60 * 60 * 1000) );
+        	Ticket ticket3=new Ticket(Criticite.NORMAL, "this is a test", Status.EN_ATTENTE );
         	ticket3.setApplication(application1);
         	ticket3.setAdmin(admin);
         	ticket3.setClient(c1);
         	adminService.ajouterTicket(ticket3);
-        	Ticket ticket4=new Ticket(Criticite.NON_URGENT, "this is a test", Status.EN_ATTENTE,new Date(System.currentTimeMillis()) ,new Date(System.currentTimeMillis() + 15 * 24 * 60 * 60 * 1000) );
+        	Ticket ticket4=new Ticket(Criticite.NON_URGENT, "this is a test", Status.EN_ATTENTE);
         	ticket4.setApplication(application2);
         	ticket4.setAdmin(admin);
         	ticket4.setClient(c2);

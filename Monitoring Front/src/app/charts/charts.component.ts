@@ -15,9 +15,11 @@ export class ChartsComponent {
   username: any;
   selectedOption: string = '';
   months: any;
+  message: string = '';
 
   @ViewChild('myChart') chartElement!: ElementRef<HTMLCanvasElement>;
   @ViewChild('ChartDev') chartDevElement!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('ChartDev2') chartDevElement2!: ElementRef<HTMLCanvasElement>;
   @ViewChild('ChartSemester')
   chartSemesterElement!: ElementRef<HTMLCanvasElement>;
 
@@ -41,6 +43,7 @@ export class ChartsComponent {
       (data) => {
         this.username = data;
         this.generateChart2();
+        this.generateChartt2();
       },
       (err) => {
         console.log(err);
@@ -93,6 +96,9 @@ export class ChartsComponent {
                 scales: {
                   y: {
                     beginAtZero: true,
+                    ticks: {
+                      stepSize: 1,
+                    },
                   },
                 },
               },
@@ -107,11 +113,14 @@ export class ChartsComponent {
   }
   generateChart2() {
     const labels = this.username;
-
+    const status = 'RÉSOLU';
+    if (labels.length == 0) {
+      this.message = 'Pas de données disponibles!';
+    }
     const ticketCounts: number[] = [];
     let loadedCount = 0;
     this.username.forEach((usr: string) => {
-      this.adminService.getTicketsCountByDev(usr).subscribe(
+      this.adminService.getTicketsCountByDev(usr, status).subscribe(
         (count) => {
           ticketCounts.push(count);
           loadedCount++;
@@ -122,7 +131,7 @@ export class ChartsComponent {
                 labels: labels,
                 datasets: [
                   {
-                    label: 'nb de tickets par développeur',
+                    label: 'nb de tickets résolus par développeur',
                     data: ticketCounts,
                     backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
@@ -150,6 +159,72 @@ export class ChartsComponent {
                 scales: {
                   y: {
                     beginAtZero: true,
+                    ticks: {
+                      stepSize: 1,
+                    },
+                  },
+                },
+              },
+            });
+          }
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    });
+  }
+  generateChartt2() {
+    const labels = this.username;
+    const status = 'EN_COURS';
+    if (labels.length == 0) {
+      this.message = 'Pas de données disponibles!';
+    }
+    const ticketCounts: number[] = [];
+    let loadedCount = 0;
+    this.username.forEach((usr: string) => {
+      this.adminService.getTicketsCountByDev(usr, status).subscribe(
+        (count) => {
+          ticketCounts.push(count);
+          loadedCount++;
+          if (loadedCount === this.username.length) {
+            const myChart = new Chart('ChartDev2', {
+              type: 'bar',
+              data: {
+                labels: labels,
+                datasets: [
+                  {
+                    label: 'nb de tickets résolus par développeur',
+                    data: ticketCounts,
+                    backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)',
+                      'rgba(255, 99, 132, 0.2)',
+                    ],
+                    borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)',
+                      'rgba(255, 99, 132, 1)',
+                    ],
+                    borderWidth: 1,
+                  },
+                ],
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    ticks: {
+                      stepSize: 1,
+                    },
                   },
                 },
               },
@@ -213,6 +288,9 @@ export class ChartsComponent {
                 scales: {
                   y: {
                     beginAtZero: true,
+                    ticks: {
+                      stepSize: 1,
+                    },
                   },
                 },
               },
@@ -271,6 +349,25 @@ export class ChartsComponent {
   }
   downloadChart3() {
     const chartCanvas = this.chartSemesterElement.nativeElement;
+    html2canvas(chartCanvas).then((canvas) => {
+      const pdf = new jsPDF({
+        orientation: 'landscape',
+      });
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      pdf.addImage(
+        canvas.toDataURL('image/png'),
+        'PNG',
+        0,
+        0,
+        pdfWidth,
+        pdfHeight
+      );
+      pdf.save('chart.pdf');
+    });
+  }
+  downloadChart4() {
+    const chartCanvas = this.chartDevElement2.nativeElement;
     html2canvas(chartCanvas).then((canvas) => {
       const pdf = new jsPDF({
         orientation: 'landscape',

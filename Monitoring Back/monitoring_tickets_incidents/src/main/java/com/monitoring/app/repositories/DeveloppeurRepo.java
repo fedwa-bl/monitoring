@@ -3,6 +3,8 @@ import java.util.Collection;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 import com.monitoring.app.entities.Developpeur;
 
 public interface DeveloppeurRepo extends JpaRepository<Developpeur, Long>{
@@ -14,4 +16,6 @@ public interface DeveloppeurRepo extends JpaRepository<Developpeur, Long>{
 	Developpeur findByUsername(String username);
 	@Query("select p.username from Personne p  WHERE p.matrAdmin IS NULL and p.active = true and p.nb_tickets_assignes !=0")
 	Collection<String> getDevs();
+	@Query("select p from Personne p  WHERE p.matrAdmin IS NULL and p.active = true and p.id != :id")
+	Collection<Developpeur> getDevsUpdate(Long id);
 }

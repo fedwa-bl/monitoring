@@ -9,8 +9,8 @@
           <h3>Tickets affectés</h3>
         </div>
         <div class="card-body">
-          <table datatable class="table table-bordered">
-            <thead class="bg-dark text-white">
+          <table datatable class="table table-hover">
+            <thead class="table-active">
               <tr>
                 <td>ID <i class="fa fa-sort" aria-hidden="true"></i></td>
                 <td>
@@ -27,6 +27,7 @@
                 </td>
                 <td>Status <i class="fa fa-sort" aria-hidden="true"></i></td>
                 <td>Développeur</td>
+                <td>Action</td>
               </tr>
             </thead>
             <tbody>
@@ -66,11 +67,19 @@
                   [class.resolved-badge]="item.status === 'RÉSOLU'"
                   [class.open-badge]="item.status === 'OUVERT'"
                   [class.canceled-badge]="item.status === 'ANNULÉ'"
+                  [class.inProcess-badge]="item.status === 'EN_COURS'"
                 >
                   {{ item.status }}
                 </td>
                 <td>
                   {{ item.developpeur.nom }} {{ item.developpeur.prenom }}
+                </td>
+                <td>
+                  <a
+                    class="btn btn-outline-primary"
+                    (click)="reAssign(item.id_ticket)"
+                    >Réaffecter</a
+                  >
                 </td>
               </tr>
             </tbody>

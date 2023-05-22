@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,8 +21,6 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.monitoring.app.security.JWTUtil;
 import com.monitoring.app.services.CustomUser;
-
-import org.springframework.security.core.userdetails.User;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 

@@ -40,13 +40,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ChartsComponent } from './charts/charts.component';
 import { NgChartsModule } from 'ng2-charts';
+import { DevDetailsComponent } from './dev-details/dev-details.component';
+import { ReAssignComponent } from './re-assign/re-assign.component';
 const routes: Routes = [
   { path: 'assign/:id', component: AssignTicketsComponent },
+  { path: 'reAssign/:id', component: ReAssignComponent },
   { path: 'manageUsers', component: ManageUsersComponent },
   { path: 'charts', component: ChartsComponent },
   { path: 'assignedTickets', component: TicketsAssignesComponent },
   { path: 'manageUsers/create', component: CreateDevComponent },
   { path: 'manageUsers/update/:cuid', component: UpdateDevComponent },
+  { path: 'manageUsers/details/:cuid', component: DevDetailsComponent },
 ];
 
 @NgModule({
@@ -66,6 +70,8 @@ const routes: Routes = [
     TicketsAssignesComponent,
     AdminComponent,
     ChartsComponent,
+    DevDetailsComponent,
+    ReAssignComponent,
   ],
   imports: [
     BrowserModule,

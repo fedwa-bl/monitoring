@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import com.monitoring.app.entities.Admin;
 import com.monitoring.app.entities.Developpeur;
-import com.monitoring.app.entities.Eds;
 import com.monitoring.app.entities.Ticket;
 import com.monitoring.app.entities.Ticket.Status;
 
@@ -24,5 +23,6 @@ public interface AdminService {
 	Optional<Ticket> findTicketById(Long id);
 	Ticket updateStatus(Status s,Long id);
 	Ticket assignDev(Developpeur dev,Long id);
+	Ticket reAssignDev(Developpeur dev,Long id);
 	List<String> getEds();
 }

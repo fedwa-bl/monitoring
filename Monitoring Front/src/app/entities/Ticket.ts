@@ -14,4 +14,5 @@ export class Ticket {
   developpeur!: Developpeur;
   admin!: Admin;
   client!: Client;
+  durée!: number;
 }

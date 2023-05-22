@@ -9,11 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.monitoring.app.entities.AppRole;
-import com.monitoring.app.entities.Developpeur;
-import com.monitoring.app.entities.Admin;
+
 import com.monitoring.app.entities.Personne;
 import com.monitoring.app.repositories.AppRoleRepository;
-import com.monitoring.app.repositories.DeveloppeurRepo;
 import com.monitoring.app.repositories.PersonneRepo;
 
 @Service

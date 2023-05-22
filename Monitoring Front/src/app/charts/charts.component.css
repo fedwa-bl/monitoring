@@ -13,6 +13,11 @@ button {
   height: 400px;
   width: 650px;
 }
+#ChartDev2 {
+  box-sizing: border-box;
+  height: 400px;
+  width: 650px;
+}
 #ChartSemester {
   box-sizing: border-box;
   height: 400px;
@@ -30,4 +35,7 @@ button {
 }
 .container {
   margin-top: 10px;
+}
+h4 {
+  color: rgb(189, 0, 0);
 }

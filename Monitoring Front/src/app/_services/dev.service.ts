@@ -12,6 +12,7 @@ export class DevService {
   public getActiveDevs() {
     return this.httpClient.get(this.apiUrl + '/activeDevs');
   }
+
   public getDevByName(name: string) {
     return this.httpClient.get(this.apiUrl + '/devByName/' + name);
   }

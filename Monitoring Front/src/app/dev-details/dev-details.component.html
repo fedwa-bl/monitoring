@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <app-nav-bar *ngIf="userService.roleMatch(['ADMIN'])"></app-nav-bar>
+    </div>
+    <div class="col-md-9">
+      <mat-card>
+        <h3>Les détails d'un compte:</h3>
+        <form>
+          <div class="row">
+            <div class="col">
+              <label>Nom:</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Nom"
+                id="nom"
+                [(ngModel)]="dev.nom"
+                name="nom"
+                disabled
+              />
+            </div>
+            <div class="col">
+              <label>Prénom:</label>
+
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Prénom"
+                id="prenom"
+                [(ngModel)]="dev.prenom"
+                name="prenom"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label>Tele:</label>
+
+              <input
+                type="tel"
+                class="form-control"
+                placeholder="N° Téléphone"
+                id="tele"
+                [(ngModel)]="dev.tele"
+                name="tele"
+                disabled
+              />
+            </div>
+            <div class="col">
+              <label>Username:</label>
+
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Username"
+                id="username"
+                [(ngModel)]="dev.username"
+                name="username"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label>Email:</label>
+
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Email"
+                id="email"
+                [(ngModel)]="dev.email"
+                name="email"
+                disabled
+              />
+            </div>
+            <div class="col">
+              <label>CUID:</label>
+
+              <input
+                type="text"
+                class="form-control"
+                placeholder="CUID"
+                id="cuid"
+                [(ngModel)]="dev.matrDev"
+                name="matrDev"
+                disabled
+              />
+            </div>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+</div>

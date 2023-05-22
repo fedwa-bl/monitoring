@@ -45,6 +45,17 @@
   border-radius: 0.25rem;
   text-align: center;
 }
+.inProcess-badge {
+  background-color: #1ecec5;
+  color: #ffff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  border-radius: 0.25rem;
+  text-align: center;
+}
 h3 {
   padding: 25px;
 }

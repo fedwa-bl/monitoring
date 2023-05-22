@@ -23,8 +23,8 @@
           </form>
         </div>
         <div class="card-body">
-          <table datatable class="table table-bordered">
-            <thead class="bg-dark text-white">
+          <table datatable class="table table-hover">
+            <thead class="table-active">
               <tr>
                 <td (click)="sortBy('cuid')">
                   CUID <i class="fa fa-sort" aria-hidden="true"></i>
@@ -42,10 +42,6 @@
                   Tickets traités
                   <i class="fa fa-sort" aria-hidden="true"></i>
                 </td>
-
-                <td (click)="sortBy('email')">
-                  Email <i class="fa fa-sort" aria-hidden="true"></i>
-                </td>
                 <td (click)="sortBy('status')">Status</td>
                 <td>Action</td>
               </tr>
@@ -62,7 +58,6 @@
                 <td>{{ item.prenom }}</td>
                 <td>{{ item.username }}</td>
                 <td>{{ item.nb_tickets_assignes }}</td>
-                <td>{{ item.email }}</td>
                 <td
                   [ngClass]="{
                     'text-success': item.active,
@@ -77,6 +72,11 @@
                     class="btn btn-outline-primary"
                     (click)="onUpdate(item.matrDev)"
                     >Modifier</a
+                  >
+                  <a
+                    class="btn btn-outline-secondary"
+                    (click)="onDetails(item.matrDev)"
+                    >Détails</a
                   >
                   <a class="btn btn-outline-danger" (click)="onDelete(item)"
                     >Supprimer</a

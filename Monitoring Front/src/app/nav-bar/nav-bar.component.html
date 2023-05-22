@@ -1,14 +1,25 @@
 <div class="row">
-  <div class="col-md-3 sidebar" [ngClass]="{ open: isSidebarOpen }">
+  <div class="col-md-3 sidebar">
     <img
-      src="https://www.dimajadid.com/wp-content/uploads/2021/12/Sofrecom.jpg"
+      src="https://emploi24.ma/wp-content/uploads/2022/12/Sofrecom-Maroc-recrute-plusieurs-profils.webp"
       alt=""
     />
     <nav class="navbar navbar-expand-md sidebar-menu">
-      <div class="navbar-collapse" id="navbarNav">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#sidebarNav"
+        aria-controls="sidebarNav"
+        aria-expanded="false"
+        aria-label="Toggle Sidebar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="sidebarNav">
         <ul class="navbar-nav flex-column">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/admin">Acceuil</a>
+            <a class="nav-link" routerLink="/admin">Accueil</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/assignedTickets"

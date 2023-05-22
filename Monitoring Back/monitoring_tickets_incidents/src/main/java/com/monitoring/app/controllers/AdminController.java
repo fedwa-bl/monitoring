@@ -19,7 +19,6 @@ import com.monitoring.app.entities.Admin;
 import com.monitoring.app.entities.Developpeur;
 import com.monitoring.app.entities.Ticket;
 import com.monitoring.app.entities.Ticket.Status;
-import com.monitoring.app.entities.TicketCount;
 import com.monitoring.app.repositories.DeveloppeurRepo;
 import com.monitoring.app.repositories.TicketRepo;
 import com.monitoring.app.services.AccountService;
@@ -105,8 +104,8 @@ public class AdminController {
 	}
 
 	@GetMapping("/tickets/countDev")
-	public int countByDev(@RequestParam("username") String dev) {
-	    return ts.countByDev(dev);
+	public int countByDev(@RequestParam("username") String dev,@RequestParam("status") Status status) {
+	    return ts.countByDev(dev,status);
 	}
 	@GetMapping("/ticketSemester")
     public int getTicketCounts(@RequestParam("mois") int mois) {
@@ -136,6 +135,36 @@ public class AdminController {
 		}
 		return response;
 	}
+	@GetMapping("/usernames/{id}")
+	public List<Developpeur> getUsernames(@PathVariable Long id){
+		Ticket t =ts.findById(id).get();
+		System.out.println(t.getId_ticket());
+		Long oldDevId=t.getDeveloppeur().getId();
+		return (List<Developpeur>) dr.getDevsUpdate(oldDevId);
+	}
+	@PostMapping("/reAssign")
+	public AssignResponse reAssign(@RequestBody AssignInput input) {
+		Optional<Ticket> ticketOp = ts.findById(input.id_ticket);
+		Optional<Developpeur> devOp = adminService.findDevByCuid(input.matrDev );
+		System.out.println(ticketOp);
+		AssignResponse response = new AssignResponse();
+		if (ticketOp.isPresent()&&devOp.isPresent()) {
+	        Ticket ticket = ticketOp.get();
+	        Developpeur dev=devOp.get();
+		if(ticket == null) {
+			response.error.field = "ticket";
+			response.error.message = "ticket not found";
+		}else if(dev == null){
+			response.error.field = "dev";
+			response.error.message = "dev not found";
+		}else {
+			response.ticket =adminService.reAssignDev(dev, ticket.getId_ticket());
+						
+		}
+		}
+		return response;
+	}
+	
 }
 
 
