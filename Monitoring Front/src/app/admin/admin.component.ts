@@ -35,5 +35,6 @@ export class AdminComponent implements OnInit {
   }
   assign(id_ticket: number) {
     this.router.navigate(['/assign', id_ticket]);
+    console.log('ssssssssss' + id_ticket);
   }
 }

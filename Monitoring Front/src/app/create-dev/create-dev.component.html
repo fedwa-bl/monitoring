@@ -1,7 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <app-nav-bar *ngIf="userService.roleMatch(['ADMIN'])"></app-nav-bar>
+      <app-navbar-admin
+        *ngIf="userService.roleMatch(['ADMIN'])"
+      ></app-navbar-admin>
     </div>
     <div class="col-md-9">
       <mat-card>
@@ -60,7 +62,7 @@
               <input
                 type="tel"
                 class="form-control"
-                placeholder="N° Téléphone"
+                placeholder="ex: 06XXXXXXXX"
                 id="tele"
                 [(ngModel)]="dev.tele"
                 name="tele"
@@ -74,7 +76,7 @@
               <input
                 type="email"
                 class="form-control"
-                placeholder="Email"
+                placeholder="Ex: XXXXX@sofrecom.com"
                 id="email"
                 [(ngModel)]="dev.email"
                 name="email"
@@ -94,6 +96,7 @@
                 id="cuid"
                 [(ngModel)]="dev.matrDev"
                 name="cuid"
+                matTooltip="Le cuid doit être au moins 8 caractères"
               />
             </div>
             <div class="invalid-feedback" *ngIf="cuidErrorMessage">
@@ -102,12 +105,13 @@
             <div class="col">
               <label>Mot de passe:</label>
               <input
-                type="text"
+                type="password"
                 class="form-control"
                 placeholder="Mot de passe"
                 id="pwd"
                 [(ngModel)]="dev.password"
                 name="password"
+                matTooltip="Le mot de passe doit être au moins 8 caractères"
               />
             </div>
             <div class="invalid-feedback" *ngIf="passwordErrorMessage">

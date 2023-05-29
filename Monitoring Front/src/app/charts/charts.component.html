@@ -1,72 +1,57 @@
 <div class="container">
   <div class="row">
     <div class="col-md-2">
-      <app-nav-bar *ngIf="userService.roleMatch(['ADMIN'])"></app-nav-bar>
+      <app-navbar-admin
+        *ngIf="userService.roleMatch(['ADMIN'])"
+      ></app-navbar-admin>
     </div>
     <div class="col-md-10">
-      <select class="form-control" (change)="onOptionSelected($event)">
-        <option selected>Options...</option>
-        <option>Nombre de tickets par EDS</option>
-        <option>Nombre de tickets résolus par développeur</option>
-        <option>Nombre de tickets en cours de traitement</option>
-        <option>Rapport</option>
-      </select>
-
-      <div
-        class="charts"
-        *ngIf="
-          selectedOption !== 'Nombre de tickets résolus par développeur' &&
-          selectedOption !== 'Rapport' &&
-          selectedOption !== 'Nombre de tickets en cours de traitement'
-        "
-      >
-        <h3>Nombre de tickets par EDS</h3>
-        <canvas id="myChart" #myChart></canvas>
-        <button (click)="download()" class="btn btn-info">Imprimer</button>
-      </div>
-      <div
-        class="charts"
-        *ngIf="
-          selectedOption !== 'Nombre de tickets par EDS' &&
-          selectedOption !== 'Rapport' &&
-          selectedOption !== 'Nombre de tickets en cours de traitement'
-        "
-      >
-        <h3>Nombre de tickets résolus par développeur</h3>
-        <canvas *ngIf="message == ''" id="ChartDev" #ChartDev></canvas>
-        <h4>{{ message }}</h4>
-        <button type="button" (click)="downloadChart()" class="btn btn-info">
-          Imprimer
-        </button>
-      </div>
-      <div
-        class="charts"
-        *ngIf="
-          selectedOption !== 'Nombre de tickets par EDS' &&
-          selectedOption !== 'Rapport' &&
-          selectedOption !== 'Nombre de tickets résolus par développeur'
-        "
-      >
-        <h3>Nombre de tickets en cours de traitement</h3>
-        <canvas *ngIf="message == ''" id="ChartDev2" #ChartDev2></canvas>
-        <h4>{{ message }}</h4>
-        <button type="button" (click)="downloadChart4()" class="btn btn-info">
-          Imprimer
-        </button>
-      </div>
-      <div
-        class="charts"
-        *ngIf="
-          selectedOption !== 'Nombre de tickets résolus par développeur' &&
-          selectedOption !== 'Nombre de tickets par EDS' &&
-          selectedOption !== 'Nombre de tickets en cours de traitement'
-        "
-      >
-        <h3>Nombre de tickets par mois</h3>
-        <canvas id="ChartSemester" #ChartSemester></canvas>
-        <button type="button" (click)="downloadChart3()" class="btn btn-info">
-          Imprimer
-        </button>
+      <div class="card">
+        <div class="card-header">
+          <h3>Statistiques des Tickets</h3>
+        </div>
+        <div class="card-body">
+          <div class="charts">
+            <p>Nombre de tickets par EDS</p>
+            <canvas id="myChart" #myChart></canvas>
+            <button (click)="download()" class="btn btn-info">Imprimer</button>
+          </div>
+          <div class="charts">
+            <p>Nombre de tickets résolus par développeur</p>
+            <canvas *ngIf="message == ''" id="ChartDev" #ChartDev></canvas>
+            <h4>{{ message }}</h4>
+            <button
+              type="button"
+              (click)="downloadChart()"
+              class="btn btn-info"
+            >
+              Imprimer
+            </button>
+          </div>
+          <div class="charts">
+            <p>Nombre de tickets en cours de traitement</p>
+            <canvas *ngIf="message == ''" id="ChartDev2" #ChartDev2></canvas>
+            <h4>{{ message }}</h4>
+            <button
+              type="button"
+              (click)="downloadChart4()"
+              class="btn btn-info"
+            >
+              Imprimer
+            </button>
+          </div>
+          <div class="charts">
+            <p>Nombre de tickets par mois</p>
+            <canvas id="ChartSemester" #ChartSemester></canvas>
+            <button
+              type="button"
+              (click)="downloadChart3()"
+              class="btn btn-info"
+            >
+              Imprimer
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

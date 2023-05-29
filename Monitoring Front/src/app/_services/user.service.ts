@@ -68,6 +68,7 @@ export class UserService {
   }
 
   public changePassword(id: number, newPassword: string): Observable<any> {
+    this.userAuthService.getAccessToken();
     const accesstoken = localStorage.getItem('accesstoken');
     const body = { password: newPassword };
     const httpOptions = {
@@ -83,6 +84,7 @@ export class UserService {
       httpOptions
     );
   }
+
   getCurrentUser(): Observable<any> {
     return this.httpclient.get(this.PATH_OF_API + `/api/profile`);
   }

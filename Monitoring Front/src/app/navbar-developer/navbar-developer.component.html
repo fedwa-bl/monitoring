@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-3 sidebar">
+    <img
+      src="https://emploi24.ma/wp-content/uploads/2022/12/Sofrecom-Maroc-recrute-plusieurs-profils.webp"
+      alt=""
+    />
+    <nav class="navbar navbar-expand-md sidebar-menu">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#sidebarNav"
+        aria-controls="sidebarNav"
+        aria-expanded="false"
+        aria-label="Toggle Sidebar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="sidebarNav">
+        <ul class="navbar-nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/developer">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/ticketsInProgressDeveloper"
+              >Tickets EN COURS</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/ticketsResolvedDeveloper"
+              >Tickets RÉSOLUS</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/ticketsCanceledDeveloper"
+              >Tickets ANNULÉS</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/developerStatistics"
+              >Statistiques</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="col-md-9">
+    <router-outlet></router-outlet>
+  </div>
+</div>

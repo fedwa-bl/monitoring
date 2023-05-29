@@ -1,0 +1,73 @@
+.sidebar {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: rgb(255, 242, 238);
+  border-right: 1px solid #e2dbdb;
+  overflow-x: hidden;
+  transition: 0.5s;
+  width: 20%;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar.open {
+  width: 250px;
+}
+
+.burger-button {
+  background-color: transparent;
+  border: none;
+  color: #495057;
+  font-size: 24px;
+  padding: 0.5rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+@media screen and (min-width: 992px) {
+  .sidebar {
+    width: 250px;
+  }
+}
+
+.navbar-nav {
+  width: 100%;
+}
+
+.nav-item {
+  margin-bottom: 10px;
+}
+
+.nav-link {
+  color: #495057;
+}
+
+.nav-link:hover {
+  color: white;
+  background-color: rgb(255, 136, 0);
+}
+
+img {
+  height: 80px;
+}
+.sidebar-menu ul {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-menu li {
+  border-bottom: 1px solid #ccc;
+}
+
+.sidebar-menu li:last-child {
+  border-bottom: none;
+}
+.navbar {
+  padding: 0;
+}

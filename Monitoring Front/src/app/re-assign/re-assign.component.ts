@@ -5,6 +5,10 @@ import { AdminService } from '../_services/admin.service';
 import { UserService } from '../_services/user.service';
 import { DevService } from '../_services/dev.service';
 import { Developpeur } from '../entities/developpeur';
+import { Location } from '@angular/common';
+
+import Swal from 'sweetalert2';
+import { duration } from 'moment';
 
 @Component({
   selector: 'app-re-assign',
@@ -26,7 +30,8 @@ export class ReAssignComponent implements OnInit {
     private adminService: AdminService,
     public userService: UserService,
     private devService: DevService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -48,12 +53,30 @@ export class ReAssignComponent implements OnInit {
     this.adminService.getTicketById(id).subscribe(
       (data) => {
         this.ticket = data as Ticket;
-        this.durationInMillis =
-          new Date(this.ticket.date_fin).getTime() -
-          new Date(this.ticket.date_creation).getTime();
-        this.durationInDays = Math.floor(
-          this.durationInMillis / (1000 * 60 * 60 * 24)
-        );
+        if (this.ticket.status === 'RÉSOLU') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Vous ne pouvez pas réaffecter un ticket résolu!',
+          });
+          this.location.back();
+        } else if (this.ticket.status === 'EN_COURS') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Vous ne pouvez pas réaffecter un ticket en cours de résolution!',
+          });
+          this.location.back();
+        } else {
+          this.durationInMillis =
+            new Date(this.ticket.date_fin).getTime() -
+            new Date(this.ticket.date_creation).getTime();
+          console.log(this.ticket.date_creation);
+          this.durationInDays = Math.floor(
+            this.durationInMillis / (1000 * 60 * 60 * 24)
+          );
+          console.log(this.durationInDays);
+        }
       },
       (err) => {
         console.log(err);

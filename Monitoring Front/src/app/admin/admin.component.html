@@ -1,7 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-2">
-      <app-nav-bar *ngIf="userService.roleMatch(['ADMIN'])"></app-nav-bar>
+      <app-navbar-admin
+        *ngIf="userService.roleMatch(['ADMIN'])"
+      ></app-navbar-admin>
     </div>
     <div class="col-md-10">
       <div class="card">
@@ -41,8 +43,8 @@
                     href="/admin"
                     matTooltip="Nom de l'application:{{
                       item.application.nom
-                    }} Description:{{ item.application.description }} EDS:{{
-                      item.application.eds.description
+                    }} EDS:{{ item.application.eds.description }} Description:{{
+                      item.application.description
                     }}"
                   >
                     {{ item.application.nom }}
@@ -58,7 +60,7 @@
                 >
                   {{ item.criticite }}
                 </td>
-                <td>{{ item.date_creation }}</td>
+                <td>{{ item.date_creation | date : "yyyy-MM-dd HH:mm:ss" }}</td>
                 <td
                   [class.pending-badge]="item.status === 'EN_ATTENTE'"
                   [class.resolved-badge]="item.status === 'RÉSOLU'"

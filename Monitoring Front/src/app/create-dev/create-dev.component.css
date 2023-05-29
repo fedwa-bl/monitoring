@@ -13,3 +13,8 @@ button {
   margin: 0 auto;
   display: block;
 }
+h3 {
+  padding: 25px;
+  background-color: #e6e2ddcb;
+  margin-bottom: 0;
+}

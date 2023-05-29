@@ -1,6 +1,14 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 body {
+  margin: 0px;
+  background-color: #d8d8d8;
+}
+
+/* You can add global styles to this file, and also import other style files */
+/* BASIC */
+
+body {
   font-family: "Poppins", sans-serif;
   height: 81vh;
   margin: 0px;
@@ -36,7 +44,8 @@ h2 {
   width: 100%;
   min-height: 100%;
   padding: 20px;
-  margin-bottom: 11%;
+  margin-bottom: 12%;
+  background-image: url(../../assets/scattered-forcefields.svg);
 }
 
 #formContent {

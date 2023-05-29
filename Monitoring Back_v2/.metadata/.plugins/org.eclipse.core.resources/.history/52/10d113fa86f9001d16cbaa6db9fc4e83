@@ -1,0 +1,253 @@
+package com.monitoring.app.controllers;
+
+import java.security.Principal;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.monitoring.app.entities.Developpeur;
+import com.monitoring.app.entities.Ticket;
+import com.monitoring.app.entities.Ticket.Status;
+import com.monitoring.app.repositories.DeveloppeurRepo;
+import com.monitoring.app.repositories.TicketRepo;
+import com.monitoring.app.services.AdminService;
+
+@RestController
+@RequestMapping("/ticket")
+@CrossOrigin(origins = "http://localhost:4200")
+public class TicketController {
+
+	private AdminService adminService;
+	private TicketRepo ticketRepo;
+	private DeveloppeurRepo developpeurRepo;
+	
+	
+	public TicketController(AdminService adminService, TicketRepo ticketRepo, DeveloppeurRepo developpeurRepo) {
+		this.adminService = adminService;
+		this.ticketRepo = ticketRepo;
+		this.developpeurRepo = developpeurRepo;
+	}
+
+	@GetMapping("/getStatus")
+	public Status[] getStatuses(){
+		return Arrays.stream(Status.values())
+	            .filter(status -> status != Status.EN_ATTENTE && status != Status.OUVERT)
+	            .toArray(Status[]::new);
+	}
+	
+	@GetMapping("/getTicket/{id}")
+	public Optional<Ticket> findTicketById(@PathVariable Long id){
+		return adminService.findTicketById(id);
+	}
+	
+	/*@GetMapping("/status/developer")
+	public ResponseEntity<?> getTicketCountsByStatus(Principal currentUser) throws JsonProcessingException {
+	    if (currentUser == null) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You must be authenticated to access this resource.");
+	    }
+	    
+	    Developpeur currentDeveloper = developpeurRepo.findByUsername(currentUser.getName());
+	    Long currentDeveloperId = currentDeveloper.getId();
+	    //Developpeur currentDeveloper = developpeurRepo.findById(Long.parseLong(currentUser.getName())).orElse(null);
+	    Map<Ticket.Status, Long> ticketCountsByStatus = ticketRepo.countTicketsByStatusForDeveloper(currentDeveloperId);
+	    System.out.println("Current developer ID :"+currentDeveloperId);
+	    
+	    Map<String, Long> ticketCountsByStatusString = new HashMap<>();
+	    for (Map.Entry<Ticket.Status, Long> entry : ticketCountsByStatus.entrySet()) {
+	    	if (entry.getKey() != null) {
+	            //ticketCountsByStatusString.put(entry.getKey().toString(), entry.getValue());
+	    		ticketCountsByStatusString.put(entry.getKey().name(), entry.getValue());
+	            System.out.println(entry.getKey() + " : " + entry.getValue());
+	        }
+	    }
+	    ObjectMapper mapper = new ObjectMapper();
+	    String jsonString = mapper.writeValueAsString(ticketCountsByStatusString);
+	    return ResponseEntity.ok(jsonString);
+	}*/
+	
+	/*@GetMapping("/status/developer")
+	public ResponseEntity<?> getTicketCountsByStatus(Principal currentUser) throws JsonProcessingException {
+	    if (currentUser == null) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You must be authenticated to access this resource.");
+	    }
+
+	    Developpeur currentDeveloper = developpeurRepo.findByUsername(currentUser.getName());
+	    Long currentDeveloperId = currentDeveloper.getId();
+
+	    Map<Ticket.Status, Long> ticketCountsByStatus = ticketRepo.countTicketsByStatusForDeveloper(currentDeveloperId);
+	    System.out.println("Current developer ID: " + currentDeveloperId);
+
+	    Map<String, Long> ticketCountsByStatusString = new HashMap<>();
+	    for (Map.Entry<Ticket.Status, Long> entry : ticketCountsByStatus.entrySet()) {
+	        if (entry.getKey() != null) {
+	        	ticketCountsByStatusString.put(entry.getKey().toString(), entry.getValue());
+	            System.out.println("Key: " + entry.getKey().toString() + ", Value: " + entry.getValue());
+	        }else {
+	            System.out.println("Null key found");
+	        }
+	    }
+
+	    ObjectMapper mapper = new ObjectMapper();
+	    String jsonString = mapper.writeValueAsString(ticketCountsByStatusString);
+	    return ResponseEntity.ok(jsonString);
+	}*/
+	
+	//count number of status(résolu, ouvert, annulé, en_attente)
+	/*@GetMapping("/status/developer")
+	public ResponseEntity<?> getTicketCountsByStatus(Principal currentUser) throws JsonProcessingException {
+	    if (currentUser == null) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You must be authenticated to access this resource.");
+	    }
+
+	    Developpeur currentDeveloper = developpeurRepo.findByUsername(currentUser.getName());
+	    Long currentDeveloperId = currentDeveloper.getId();
+
+	    List<Object[]> results = ticketRepo.countTicketsByStatusForDeveloper(currentDeveloperId);
+	    Map<Ticket.Status, Long> ticketCountsByStatus = new HashMap<>();
+
+	    for (Object[] result : results) {
+	        Ticket.Status status = (Ticket.Status) result[0];
+	        Long count = (Long) result[1];
+	        ticketCountsByStatus.put(status, count);
+	    }
+
+	    Map<String, Long> ticketCountsByStatusString = new HashMap<>();
+	    for (Map.Entry<Ticket.Status, Long> entry : ticketCountsByStatus.entrySet()) {
+	        if (entry.getKey() != null) {
+	            ticketCountsByStatusString.put(entry.getKey().toString(), entry.getValue());
+	            System.out.println("Key: " + entry.getKey().toString() + ", Value: " + entry.getValue());
+	        } else {
+	            System.out.println("Null key found");
+	        }
+	    }
+
+	    ObjectMapper mapper = new ObjectMapper();
+	    String jsonString = mapper.writeValueAsString(ticketCountsByStatusString);
+	    return ResponseEntity.ok(jsonString);
+	}*/
+	
+	//count number of status(résolu, ouvert, annulé, en_attente) par application
+		/*@GetMapping("/status/application/developer")
+		public ResponseEntity<?> getStatusCountsByApplication(Principal currentUser) throws JsonProcessingException {
+		    if (currentUser == null) {
+		        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You must be authenticated to access this resource.");
+		    }
+
+		    Developpeur currentDeveloper = developpeurRepo.findByUsername(currentUser.getName());
+		    Long currentDeveloperId = currentDeveloper.getId();
+
+		    List<Object[]> results = ticketRepo.countStatusByApplicationForDeveloper(currentDeveloperId);
+		    Map<String, Long> ticketCountsByStatusString  = new HashMap<>();
+
+		    for (Object[] result : results) {
+		        String applicationName = (String) result[0];
+		        Ticket.Status status = (Ticket.Status) result[1];
+		        Long count = (Long) result[2];
+		        
+		        String key = applicationName + "_" + status.toString();
+		        ticketCountsByStatusString.put(key, count);
+		    }
+
+		    return ResponseEntity.ok(ticketCountsByStatusString);
+		}*/
+
+	@GetMapping("/status/developer")
+	public ResponseEntity<?> getTicketCountsByStatus(
+	    @RequestParam(name = "appName", required = false) String appName, Principal currentUser) throws JsonProcessingException {
+	    if (currentUser == null) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You must be authenticated to access this resource.");
+	    }
+
+	    Developpeur currentDeveloper = developpeurRepo.findByUsername(currentUser.getName());
+	    Long currentDeveloperId = currentDeveloper.getId();
+
+	    List<Object[]> results;
+	    if (appName != null) {
+	    	System.out.println("APPLICATION NAME :"+appName);
+	        results = ticketRepo.countTicketsByStatusForDeveloperAndAppName(currentDeveloperId, appName);
+	    } else {
+	        results = ticketRepo.countTicketsByStatusForDeveloper(currentDeveloperId);
+	    }
+
+	    Map<Ticket.Status, Long> ticketCountsByStatus = new HashMap<>();
+
+	    for (Object[] result : results) {
+	        Ticket.Status status = (Ticket.Status) result[0];
+	        Long count = (Long) result[1];
+	        ticketCountsByStatus.put(status, count);
+	    }
+
+	    Map<String, Long> ticketCountsByStatusString = new HashMap<>();
+	    for (Map.Entry<Ticket.Status, Long> entry : ticketCountsByStatus.entrySet()) {
+	        if (entry.getKey() != null) {
+	            ticketCountsByStatusString.put(entry.getKey().toString(), entry.getValue());
+	            System.out.println("Key: " + entry.getKey().toString() + ", Value: " + entry.getValue());
+	        } else {
+	            System.out.println("Null key found");
+	        }
+	    }
+
+	    ObjectMapper mapper = new ObjectMapper();
+	    String jsonString = mapper.writeValueAsString(ticketCountsByStatusString);
+	    return ResponseEntity.ok(jsonString);
+	}
+	
+	@GetMapping("/criticite/developer")
+	public ResponseEntity<?> getTicketCountsByCriticite(
+	    @RequestParam(name = "appName", required = false) String appName, Principal currentUser) throws JsonProcessingException {
+	    if (currentUser == null) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You must be authenticated to access this resource.");
+	    }
+
+	    Developpeur currentDeveloper = developpeurRepo.findByUsername(currentUser.getName());
+	    Long currentDeveloperId = currentDeveloper.getId();
+
+	    List<Object[]> results;
+	    if (appName != null) {
+	    	System.out.println("APPLICATION NAME :"+appName);
+	        results = ticketRepo.countTicketsByCriticiteForDeveloperAndAppName(currentDeveloperId, appName);
+	    } else {
+	        results = ticketRepo.countTicketsByCriticiteForDeveloper(currentDeveloperId);
+	    }
+
+	    Map<Ticket.Criticite, Long> ticketCountsByCriticite = new HashMap<>();
+
+	    for (Object[] result : results) {
+	        Ticket.Criticite criticite = (Ticket.Criticite) result[0];
+	        Long count = (Long) result[1];
+	        ticketCountsByCriticite.put(criticite, count);
+	    }
+
+	    Map<String, Long> ticketCountsByCriticiteString = new HashMap<>();
+	    for (Map.Entry<Ticket.Criticite, Long> entry : ticketCountsByCriticite.entrySet()) {
+	        if (entry.getKey() != null) {
+	            ticketCountsByCriticiteString.put(entry.getKey().toString(), entry.getValue());
+	            System.out.println("Key: " + entry.getKey().toString() + ", Value: " + entry.getValue());
+	        } else {
+	            System.out.println("Null key found");
+	        }
+	    }
+
+	    ObjectMapper mapper = new ObjectMapper();
+	    String jsonString = mapper.writeValueAsString(ticketCountsByCriticiteString);
+	    return ResponseEntity.ok(jsonString);
+	}
+
+
+
+
+}

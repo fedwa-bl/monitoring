@@ -1,7 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-2">
-      <app-nav-bar *ngIf="userService.roleMatch(['ADMIN'])"></app-nav-bar>
+      <app-navbar-admin
+        *ngIf="userService.roleMatch(['ADMIN'])"
+      ></app-navbar-admin>
     </div>
     <div class="col-md-10">
       <div class="card">
@@ -27,6 +29,10 @@
                 </td>
                 <td>Status <i class="fa fa-sort" aria-hidden="true"></i></td>
                 <td>Développeur</td>
+                <td>
+                  Date de résolution
+                  <i class="fa fa-sort" aria-hidden="true"></i>
+                </td>
                 <td>Action</td>
               </tr>
             </thead>
@@ -61,7 +67,7 @@
                 >
                   {{ item.criticite }}
                 </td>
-                <td>{{ item.date_creation }}</td>
+                <td>{{ item.date_creation | date : "yyyy-MM-dd HH:mm:ss" }}</td>
                 <td
                   [class.pending-badge]="item.status === 'EN_ATTENTE'"
                   [class.resolved-badge]="item.status === 'RÉSOLU'"
@@ -73,6 +79,9 @@
                 </td>
                 <td>
                   {{ item.developpeur.nom }} {{ item.developpeur.prenom }}
+                </td>
+                <td class="text-center">
+                  {{ item.date_resolution | date : "yyyy-MM-dd HH:mm:ss" }}
                 </td>
                 <td>
                   <a

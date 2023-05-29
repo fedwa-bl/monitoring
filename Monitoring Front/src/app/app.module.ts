@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
@@ -36,20 +35,26 @@ import { UserService } from './_services/user.service';
 import { AdminComponent } from './admin/admin.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatIconModule } from '@angular/material/icon';
-import { ReactiveFormsModule } from '@angular/forms';
+import { UpdateTicketComponent } from './update-ticket/update-ticket.component';
+import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
+import { NavbarDeveloperComponent } from './navbar-developer/navbar-developer.component';
+import { TicketsOpenedDeveloperComponent } from './tickets-opened-developer/tickets-opened-developer.component';
+import { TicketsResolvedDeveloperComponent } from './tickets-resolved-developer/tickets-resolved-developer.component';
+import { TicketsCanceledDeveloperComponent } from './tickets-canceled-developer/tickets-canceled-developer.component';
+import { DeveloperStatisticsComponent } from './developer-statistics/developer-statistics.component';
+import { TicketsInProgressdDeveloperComponent } from './tickets-in-progressd-developer/tickets-in-progressd-developer.component';
 import { ChartsComponent } from './charts/charts.component';
-import { NgChartsModule } from 'ng2-charts';
-import { DevDetailsComponent } from './dev-details/dev-details.component';
 import { ReAssignComponent } from './re-assign/re-assign.component';
+import { DevDetailsComponent } from './dev-details/dev-details.component';
+import { MatMenuModule } from '@angular/material/menu';
 const routes: Routes = [
   { path: 'assign/:id', component: AssignTicketsComponent },
-  { path: 'reAssign/:id', component: ReAssignComponent },
   { path: 'manageUsers', component: ManageUsersComponent },
-  { path: 'charts', component: ChartsComponent },
   { path: 'assignedTickets', component: TicketsAssignesComponent },
   { path: 'manageUsers/create', component: CreateDevComponent },
   { path: 'manageUsers/update/:cuid', component: UpdateDevComponent },
+  { path: 'reAssign/:id', component: ReAssignComponent },
+  { path: 'charts', component: ChartsComponent },
   { path: 'manageUsers/details/:cuid', component: DevDetailsComponent },
 ];
 
@@ -57,9 +62,9 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
+    NavbarAdminComponent,
     PasswordChangeComponent,
     HeaderComponent,
-    NavBarComponent,
     ManageUsersComponent,
     CreateDevComponent,
     UpdateDevComponent,
@@ -69,9 +74,17 @@ const routes: Routes = [
     ForbiddenComponent,
     TicketsAssignesComponent,
     AdminComponent,
+    UpdateTicketComponent,
+    NavbarAdminComponent,
+    NavbarDeveloperComponent,
+    TicketsOpenedDeveloperComponent,
+    TicketsResolvedDeveloperComponent,
+    TicketsCanceledDeveloperComponent,
+    DeveloperStatisticsComponent,
+    TicketsInProgressdDeveloperComponent,
     ChartsComponent,
-    DevDetailsComponent,
     ReAssignComponent,
+    DevDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,7 +98,6 @@ const routes: Routes = [
     MatButtonModule,
     MatDividerModule,
     MatFormFieldModule,
-    MatIconModule,
     MatInputModule,
     MatCardModule,
     MatTooltipModule,
@@ -96,8 +108,7 @@ const routes: Routes = [
     MatDatepickerModule,
     MatNativeDateModule,
     AppRoutingModule,
-    ReactiveFormsModule,
-    NgChartsModule,
+    MatMenuModule,
   ],
   providers: [
     AuthGuard,

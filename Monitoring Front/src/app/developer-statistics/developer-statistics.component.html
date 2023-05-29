@@ -1,0 +1,198 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <app-navbar-developer
+        *ngIf="userService.roleMatch(['DEVELOPER'])"
+      ></app-navbar-developer>
+    </div>
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header">
+          <h3>Statistiques des Tickets</h3>
+        </div>
+        <div class="card-body">
+          <!--Doughnut Chart: Statistique status des tickets par Application -->
+          <div>
+            <p
+              style="
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+                  sans-serif;
+              "
+            >
+              Statistique status des tickets par Application
+            </p>
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-gap: 10px;
+              "
+            >
+              <div *ngFor="let appName of applicationNames">
+                <div style="position: relative">
+                  <p
+                    style="
+                      position: absolute;
+                      top: 0;
+                      left: 0;
+                      font-weight: bold;
+                      padding: 20px;
+                    "
+                  >
+                    {{ appName }}
+                  </p>
+                  <canvas id="{{ appName }}"></canvas>
+                </div>
+              </div>
+            </div>
+            <hr style="margin-top: 30px; margin-bottom: 30px" />
+          </div>
+
+          <!--Doughnut Chart: Statistique criticité des tickets par Application -->
+          <div>
+            <p
+              style="
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+                  sans-serif;
+              "
+            >
+              Statistique criticité des tickets par Application
+            </p>
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-gap: 10px;
+              "
+            >
+              <div *ngFor="let appsName of applicationNames">
+                <div style="position: relative">
+                  <p
+                    style="
+                      position: absolute;
+                      top: 0;
+                      left: 0;
+                      font-weight: bold;
+                      padding: 20px;
+                    "
+                  >
+                    {{ appsName }}
+                  </p>
+                  <canvas id="{{ appsName }}"></canvas>
+                </div>
+              </div>
+            </div>
+            <hr style="margin-top: 30px; margin-bottom: 30px" />
+          </div>
+
+          <div class="chart-container" style="margin-top: 70px">
+            <div class="chart">
+              <p
+                style="
+                  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+                    sans-serif;
+                "
+              >
+                Statistique status des tickets par Application
+              </p>
+              <div class="combobox-container">
+                <div>
+                  <label for="StatusappName"
+                    >Sélectionner une application :
+                  </label>
+                  <select
+                    id="StatusappName"
+                    [(ngModel)]="StatusselectedAppName"
+                    (change)="statusApplication(StatusselectedAppName)"
+                    class="custom-select"
+                  >
+                    <option value="" disabled selected>
+                      Selectionner une option
+                    </option>
+                    <option
+                      *ngFor="let StatusappName of applicationNames"
+                      [value]="StatusappName"
+                    >
+                      {{ StatusappName }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div style="width: 420px; height: 400px">
+                <canvas #myChart1></canvas>
+              </div>
+            </div>
+
+            <!--Second Chart: Statistique criticité des tickets par Application -->
+            <div class="chart">
+              <p
+                style="
+                  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+                    sans-serif;
+                "
+              >
+                Statistique criticité des tickets par Application
+              </p>
+              <div class="combobox-container">
+                <div>
+                  <label for="CriticiteappName"
+                    >Sélectionner une application :
+                  </label>
+                  <select
+                    id="CriticiteappName"
+                    [(ngModel)]="CriticiteselectedAppName"
+                    (change)="criticiteApplication(CriticiteselectedAppName)"
+                    class="custom-select"
+                  >
+                    <option value="" disabled selected>
+                      Selectionner une option
+                    </option>
+                    <option
+                      *ngFor="let CriticiteappName of applicationNames"
+                      [value]="CriticiteappName"
+                    >
+                      {{ CriticiteappName }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div style="width: 420px; height: 400px">
+                <canvas #myChart2></canvas>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p
+              style="
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+                  sans-serif;
+              "
+            >
+              Statistique par status ou par criticité
+            </p>
+            <div class="combobox-container">
+              <div>
+                <label for="statistiquePar"> </label>
+                <select
+                  id="statistiquePar"
+                  [(ngModel)]="selectedType"
+                  (change)="selectType(selectedType)"
+                  class="custom-select"
+                >
+                  <option value="" disabled selected>
+                    Selectionner une option
+                  </option>
+                  <option value="status">status</option>
+                  <option value="criticite">criticité</option>
+                </select>
+              </div>
+            </div>
+            <div style="width: 420px; height: 400px">
+              <canvas #myChart3></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

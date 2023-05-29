@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { Developpeur } from '../entities/developpeur';
 import { AdminService } from '../_services/admin.service';
 import { UserService } from '../_services/user.service';
@@ -78,6 +79,13 @@ export class CreateDevComponent implements OnInit {
         'Mot de passe invalide.Mot de passe doit être au moins 8 caractères'
       );
     } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Compte crée',
+        showConfirmButton: false,
+        timer: 1500,
+      });
       this.saveAccount();
     }
   }

@@ -1,0 +1,27 @@
+package com.monitoring.app.services;
+
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+
+import com.monitoring.app.entities.Developpeur;
+import com.monitoring.app.entities.Ticket;
+import com.monitoring.app.entities.Ticket.Status;
+
+public interface DeveloppeurService {
+	
+	 ResponseEntity<String> updateTicket (Status status, String comment, long id_tic, Date date_fin);
+	 
+	 //ResponseEntity<String> updateStatus (Status status, long id_tic);
+	 
+	 //String ajouterCommentaire(String comment, long id_tick);
+	 
+	 List<Ticket> findAll_byIdDev(Long id);
+	 
+	 Developpeur findMatrByUsername(String nom);
+	 
+	 List<Developpeur> findAll();
+	 
+	 List<Developpeur>getActiveDevs();
+}

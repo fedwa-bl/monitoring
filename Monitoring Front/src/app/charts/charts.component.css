@@ -1,7 +1,7 @@
 #myChart {
   box-sizing: border-box;
-  height: 400px;
-  width: 650px;
+  height: 500px;
+  width: 500px;
 }
 button {
   margin-left: 30px;
@@ -10,24 +10,33 @@ button {
 }
 #ChartDev {
   box-sizing: border-box;
-  height: 400px;
-  width: 650px;
+  height: 500px;
+  width: 500px;
 }
 #ChartDev2 {
   box-sizing: border-box;
-  height: 400px;
-  width: 650px;
+  height: 500px;
+  width: 500px;
 }
 #ChartSemester {
   box-sizing: border-box;
-  height: 400px;
-  width: 650px;
+  height: 500px;
+  width: 500px;
 }
 .charts {
   display: inline-block;
-  margin-left: 20px;
-  margin-top: 15px;
   border-bottom: 1px solid black;
+  margin-top: 3%;
+}
+h3 {
+  padding: 10px;
+  text-align: center;
+}
+.card-header {
+  background-color: #d3cfcab4;
+  border-bottom: 1px solid #dee2e6;
+  font-weight: bold;
+  padding-top: 20px;
 }
 .form-control {
   width: 30%;
@@ -38,4 +47,13 @@ button {
 }
 h4 {
   color: rgb(189, 0, 0);
+}
+p {
+  margin-left: 20px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.col-md-10 {
+  flex: 0 0 auto;
+  width: 95%;
+  margin-left: 13%;
 }

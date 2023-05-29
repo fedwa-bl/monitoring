@@ -63,3 +63,11 @@ h3 {
   margin-bottom: 20%;
   margin-top: 3%;
 }
+.card-header {
+  background-color: #e6e2ddcb;
+}
+.col-md-10 {
+  flex: 0 0 auto;
+  width: 97%;
+  margin-left: 12%;
+}

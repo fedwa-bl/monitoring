@@ -1,14 +1,16 @@
 <div class="container">
   <div class="row">
     <div class="col-md-2">
-      <app-nav-bar *ngIf="userService.roleMatch(['ADMIN'])"></app-nav-bar>
+      <app-navbar-admin
+        *ngIf="userService.roleMatch(['ADMIN'])"
+      ></app-navbar-admin>
     </div>
     <div class="col-md-10">
       <div class="card">
         <h3>Liste des developpeurs</h3>
         <div class="card-header">
           <a class="btn btn-outline-success" routerLink="create"
-            >Nouveau Compte</a
+            ><i class="fa fa-plus-circle"></i> Nouveau Compte</a
           >
           <form class="example-form">
             <mat-form-field class="example-full-width">
@@ -29,12 +31,6 @@
                 <td (click)="sortBy('cuid')">
                   CUID <i class="fa fa-sort" aria-hidden="true"></i>
                 </td>
-                <td (click)="sortBy('nom')">
-                  Nom <i class="fa fa-sort" aria-hidden="true"></i>
-                </td>
-                <td (click)="sortBy('prenom')">
-                  Prénom <i class="fa fa-sort" aria-hidden="true"></i>
-                </td>
                 <td (click)="sortBy('username')">
                   Username <i class="fa fa-sort" aria-hidden="true"></i>
                 </td>
@@ -54,8 +50,6 @@
                 "
               >
                 <td>{{ item.matrDev }}</td>
-                <td>{{ item.nom }}</td>
-                <td>{{ item.prenom }}</td>
                 <td>{{ item.username }}</td>
                 <td>{{ item.nb_tickets_assignes }}</td>
                 <td
@@ -67,20 +61,26 @@
                   {{ item.active ? "Activé" : "Non Activé" }}
                 </td>
 
-                <td>
+                <td style="width: 20%">
                   <a
+                    matTooltip="Modifer"
                     class="btn btn-outline-primary"
                     (click)="onUpdate(item.matrDev)"
-                    >Modifier</a
                   >
+                    <i class="far fa-edit"></i>
+                  </a>
                   <a
+                    matTooltip="Détails"
                     class="btn btn-outline-secondary"
                     (click)="onDetails(item.matrDev)"
-                    >Détails</a
-                  >
-                  <a class="btn btn-outline-danger" (click)="onDelete(item)"
-                    >Supprimer</a
-                  >
+                    ><i class="fa fa-info-circle"></i>
+                  </a>
+                  <a
+                    matTooltip="Supprimer"
+                    class="btn btn-outline-danger"
+                    (click)="onDelete(item)"
+                    ><i class="fas fa-trash-alt"></i>
+                  </a>
                 </td>
               </tr>
             </tbody>

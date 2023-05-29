@@ -2,8 +2,12 @@ h3 {
   padding: 25px;
 }
 .card {
-  margin-bottom: 3%;
   margin-top: 3%;
+}
+.col-md-10 {
+  flex: 0 0 auto;
+  width: 95%;
+  margin-left: 13%;
 }
 .resolved-badge {
   background-color: #28a745;
@@ -50,4 +54,7 @@ h3 {
   padding: 0.25em 0.5em;
   border-radius: 0.25rem;
   text-align: center;
+}
+.card-header {
+  background-color: #e6e2ddcb;
 }

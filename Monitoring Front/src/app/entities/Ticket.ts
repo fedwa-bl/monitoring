@@ -1,11 +1,11 @@
 import { Admin } from './admin';
 import { Application } from './application';
-import { Client } from './client';
 import { Developpeur } from './developpeur';
 
 export class Ticket {
   id_ticket!: number;
   description!: string;
+  commentaire!: string;
   status!: string;
   criticite!: string;
   date_creation!: Date;
@@ -13,6 +13,8 @@ export class Ticket {
   application!: Application;
   developpeur!: Developpeur;
   admin!: Admin;
-  client!: Client;
+  timer!: number;
+  duration!: string;
   durée!: number;
+  date_resolution!: Date;
 }

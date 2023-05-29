@@ -90,6 +90,12 @@ export class AdminService {
       params,
     });
   }
+  public getTicketsCountByStatus(status: string) {
+    let params = new HttpParams().set('status', status);
+    return this.httpClient.get<number>(`${this.apiUrl}/tickets/countStatus`, {
+      params,
+    });
+  }
   public getTicketsCountBySemester(mois: number) {
     const params = new HttpParams().set('mois', mois);
     return this.httpClient.get<number>(`${this.apiUrl}/ticketSemester`, {

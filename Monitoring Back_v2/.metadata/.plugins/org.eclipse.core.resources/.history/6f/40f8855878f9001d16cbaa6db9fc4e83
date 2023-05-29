@@ -1,0 +1,93 @@
+package com.monitoring.app;
+
+import java.sql.Date;
+import java.util.ArrayList;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.monitoring.app.entities.Developpeur;
+import com.monitoring.app.entities.Ticket;
+import com.monitoring.app.entities.Ticket.Criticite;
+import com.monitoring.app.entities.Ticket.Status;
+import com.monitoring.app.repositories.ApplicationRepo;
+import com.monitoring.app.services.AccountService;
+import com.monitoring.app.services.AdminService;
+import com.monitoring.app.entities.Admin;
+import com.monitoring.app.entities.AppRole;
+import com.monitoring.app.entities.Application;
+
+@SpringBootApplication
+public class MonitoringTicketsIncidentsApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(MonitoringTicketsIncidentsApplication.class, args);
+	}
+	
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
+	@Bean
+    CommandLineRunner saveUsers(AdminService adminService,AccountService accountService,ApplicationRepo applicationRepo){
+        return args -> {
+        	
+        	//add roles
+        	accountService.addNewRole(new AppRole(null,"ADMIN"));
+			accountService.addNewRole(new AppRole(null,"DEVELOPER"));
+        	 
+        	accountService.addNewUser(new Developpeur(1L,"ALAOUI","Mohamed","0654783743","malaoui","TEMP_Pwd02"
+        			,"ALAOUI.Mohamed@sofrecom.com",	"MATDEV02",false, new ArrayList<>(),0));
+        	accountService.addNewUser(new Developpeur(2L,"HADI","Fadi","0639375740","fhadi","TEMP_Pwd04"
+					,"HADI.Fadi@sofrecom.com",	"MATDEV04",false,new ArrayList<>(),0));     
+        	accountService.addNewUser(new Developpeur(3L,"dev1","dev1","0639375740","dev1","TEMP_Pwd05"
+					,"dev1.dev1@sofrecom.com",	"MATDEV05",false,new ArrayList<>(),0)); 
+        	accountService.addNewUser(new Developpeur(4L,"dev2","dev2","0639375740","dev2","TEMP_Pwd06"
+					,"dev2.dev2@sofrecom.com",	"MATDEV06",false,new ArrayList<>(),0)); 
+        	accountService.addNewUser(new Developpeur(5L,"HADI","Fadi","0639375740","fhadi","TEMP_Pwd04"
+					,"HADI.Fadi@sofrecom.com",	"MATDEV07",false,new ArrayList<>(),0)); 
+        	accountService.addNewUser(new Developpeur(6L,"HADI","Fadi","0639375740","fhadi","TEMP_Pwd04"
+					,"HADI.Fadi@sofrecom.com",	"MATDEV08",false,new ArrayList<>(),0)); 
+        	accountService.addNewUser(new Developpeur(7L,"HADI","Fadi","0639375740","fhadi","TEMP_Pwd04"
+					,"HADI.Fadi@sofrecom.com",	"MATDEV09",false,new ArrayList<>(),0));
+			
+			//ajouter les roles au utilisateurs
+			accountService.addRoleToUser("malaoui","ADMIN");
+			accountService.addRoleToUser("dev1","DEVELOPER");
+			
+        	Admin admin=new Admin(8L, "super","admin", "root", "064989054", "superUser","pwd_Admin", "admin@sofrecom.com", true, new ArrayList<>());
+        	accountService.addNewUser(admin);
+        	accountService.addRoleToUser("superUser","ADMIN");
+			//ajouter des applications
+			Application application= new Application("confluence", "this is a test", "2DS");
+        	Application application2= new Application("liveDoc", "this is a test", "2DSS");
+
+        	applicationRepo.save(application);
+        	applicationRepo.save(application2);
+        	//ajouter des tickets
+        	Ticket ticket1=new Ticket(Criticite.URGENT, "this is a test", Status.EN_ATTENTE,new Date(0) ,null );
+        	ticket1.setApplication(application);
+        	ticket1.setAdmin(admin);
+        	adminService.ajouterTicket(ticket1);
+        	Ticket ticket2=new Ticket(Criticite.CRITIQUE, "this is a test", Status.EN_ATTENTE,new Date(0) ,null );
+        	ticket2.setApplication(application2);
+        	ticket2.setAdmin(admin);
+        	adminService.ajouterTicket(ticket2);
+        	Ticket ticket3=new Ticket(Criticite.NORMAL, "this is a test", Status.EN_ATTENTE,new Date(0) ,null );
+        	ticket3.setApplication(application);
+        	ticket3.setAdmin(admin);
+        	adminService.ajouterTicket(ticket3);
+        	Ticket ticket4=new Ticket(Criticite.NON_URGENT, "this is a test", Status.EN_ATTENTE,new Date(0) ,null );
+        	ticket4.setApplication(application2);
+        	ticket4.setAdmin(admin);
+        	adminService.ajouterTicket(ticket4);
+        	
+        };
+        }
+
+}

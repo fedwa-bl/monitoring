@@ -1,14 +1,18 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <app-nav-bar *ngIf="userService.roleMatch(['ADMIN'])"></app-nav-bar>
+      <app-navbar-admin
+        *ngIf="userService.roleMatch(['ADMIN'])"
+      ></app-navbar-admin>
     </div>
     <div class="col-md-9">
       <mat-card>
         <div class="card-header">
-          <h3>Réaffecter un ticket:</h3>
+          <h3>Réaffecter un ticket</h3>
+        </div>
+        <div id="sub-header">
           <h5>Durée par défaut: {{ ticket["durée"] }} Jours</h5>
-          <h5>Il reste {{ durationInDays }} Jours</h5>
+          <h5>Il reste {{ durationInDays }} Jour(s)</h5>
         </div>
         <div class="card-body">
           <form (ngSubmit)="onSubmit()">

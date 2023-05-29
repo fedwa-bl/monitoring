@@ -1,0 +1,86 @@
+<app-navbar-developer *ngIf="userService.roleMatch(['DEVELOPER'])"></app-navbar-developer>
+<div class="container">
+  <mat-card>
+    <div class="row">
+      <div class="col-md-12 mx-auto">
+        <div class="card">
+            <div class="card-header">
+              <h3>Tickets OUVERT</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+              <table datatable class="table table-bordered">
+                <thead class="bg-dark text-white">
+                  <tr>
+                    <td class="text-center">ID <i class="fa fa-sort" aria-hidden="true"></i></td>
+                    <td class="text-center">Application <i class="fa fa-sort" aria-hidden="true"></i></td>
+                    <td class="text-center">Description <i class="fa fa-sort" aria-hidden="true"></i></td>
+                    <td class="text-center">Criticité <i class="fa fa-sort" aria-hidden="true"></i></td>
+                    <td class="text-center">
+                      Date de création <i class="fa fa-sort" aria-hidden="true"></i>
+                    </td>
+                    <td class="text-center">Status</td>
+                    <td class="text-center" style="width: 200px;">Commentaire</td>
+                    <td class="text-center">Temps passé</td>
+                    <td class="text-center">Action</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let item of tickets
+                        | paginate : { itemsPerPage: pageSize, currentPage: page }
+                    "
+                  >
+                    <td class="text-center">{{ item.id_ticket }}</td>
+                    <td class="text-center">
+                      <a
+                        href="#"
+                        matTooltip="Nom de l'application:{{
+                          item.application.nom
+                        }} Description:{{ item.application.description }} EDS:{{
+                          item.application.eds
+                        }}"
+                      >
+                        {{ item.application.nom }}
+                      </a>
+                    </td>
+          
+                    <td class="text-center">{{ item.description }}</td>
+                    <td class="text-center"
+                      [class.pending-badge]="item.criticite === 'CRITIQUE'"
+                      [class.resolved-badge]="item.criticite === 'NON_URGENT'"
+                      [class.open-badge]="item.criticite === 'NORMAL'"
+                      [class.canceled-badge]="item.criticite === 'URGENT'"
+                      style="text-align: center;">
+                      {{ item.criticite }}
+                    </td>
+                    <td class="text-center" >{{ item.date_creation | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+                    <td class="text-center"
+                      [class.pending-badge]="item.status === 'EN_COURS'"
+                      [class.resolved-badge]="item.status === 'RÉSOLU'"
+                      [class.open-badge]="item.status === 'OUVERT'"
+                      [class.canceled-badge]="item.status === 'ANNULÉ'"
+                      style="text-align: center;" >
+                      {{ item.status }}
+                    </td>
+                    <td class="text-center" style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;">{{ item.commentaire }}</td>
+                    <td class="text-center" >{{ item.duration }}</td>
+                    <td class="text-center">
+                        <a class="btn btn-outline-success" (click)="modifierTicket(item.id_ticket)"
+                          >Modifier</a
+                        >
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+              <div class="pagination-container">
+                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

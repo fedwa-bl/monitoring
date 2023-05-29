@@ -1,0 +1,92 @@
+#myChart1 {
+  max-width: 100%;
+  height: auto;
+}
+
+#myChart2 {
+  max-width: 100%;
+  height: auto;
+}
+
+#myChart3 {
+  max-width: 100%;
+  height: auto;
+}
+
+.chart-container {
+  display: flex;
+}
+
+.chart {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.chart:last-child {
+  margin-right: 0;
+}
+h3 {
+  padding: 10px;
+  text-align: center;
+}
+.card {
+  margin-bottom: 3%;
+  margin-top: 4%;
+}
+
+.card-header {
+  background-color: #d3cfcab4;
+  border-bottom: 1px solid #dee2e6;
+  font-weight: bold;
+  padding-top: 20px;
+}
+
+.card-body {
+  background-color: #f8f9fa;
+  padding: 6rem;
+}
+
+/* Custom styling for combobox */
+select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #555;
+  background-color: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Styling for the combobox arrow icon */
+select::-ms-expand {
+  display: none;
+}
+
+select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  font-size: 14px;
+  color: #555;
+  pointer-events: none;
+}
+
+/* Hover and focus styles for the combobox */
+select:hover,
+select:focus {
+  border-color: #999;
+  outline: none;
+}
+
+.combobox-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.combobox-container > div {
+  flex: 1;
+}

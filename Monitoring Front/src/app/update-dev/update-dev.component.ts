@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { Developpeur } from '../entities/developpeur';
 import { AdminService } from '../_services/admin.service';
 import { UserService } from '../_services/user.service';
@@ -67,8 +68,14 @@ export class UpdateDevComponent implements OnInit {
           },
           (err) => console.log(err)
         );
-        const res = this.adminService.updateDev(this.dev);
       }
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Compte bien modifié',
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   }
 }

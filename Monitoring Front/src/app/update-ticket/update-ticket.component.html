@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <app-navbar-developer
+        *ngIf="userService.roleMatch(['DEVELOPER'])"
+      ></app-navbar-developer>
+    </div>
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header" style="text-align: center; font-size: larger">
+          Modifier le ticket
+        </div>
+        <div class="card-body">
+          <div class="form-group mt-3">
+            <label>ID_Ticket:</label>
+            <input
+              type="text"
+              disabled
+              class="form-control"
+              name="idticket"
+              id="id_ticket"
+              [(ngModel)]="ticket.id_ticket"
+            />
+          </div>
+          <div class="form-group mt-4">
+            <label for="status">Status:</label>
+            <select
+              [(ngModel)]="status"
+              (ngModelChange)="onStatusChange()"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              <option value="" disabled selected>Selectionner le status</option>
+              <option *ngFor="let status of statuses" [value]="status">
+                {{ status }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group mt-4">
+            <label for="comment">Commentaire:</label>
+            <textarea
+              class="form-control"
+              id="comment"
+              name="comment"
+              rows="3"
+              [(ngModel)]="comment"
+              placeholder="Ajouter votre commantaire"
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-outline-dark"
+            (click)="onSubmit()"
+          >
+            Modifier
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

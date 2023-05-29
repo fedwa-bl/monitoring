@@ -3,6 +3,7 @@
 }
 
 .example-full-width {
+  width: 70%;
   float: right;
 }
 .card-header {
@@ -10,10 +11,15 @@
   justify-content: space-between;
   align-items: center;
 }
-
+.container {
+  margin-top: 3%;
+  margin-left: 11%;
+}
 .btn {
   margin-right: 10px;
 }
 h3 {
   padding: 25px;
+  background-color: #e6e2ddcb;
+  margin-bottom: 0;
 }

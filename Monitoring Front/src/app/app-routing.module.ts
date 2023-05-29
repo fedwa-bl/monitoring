@@ -11,7 +11,13 @@ import { TicketsAssignesComponent } from './tickets-assignes/tickets-assignes.co
 import { UpdateDevComponent } from './update-dev/update-dev.component';
 import { AuthGuard } from './_auth/auth.guard';
 import { AdminComponent } from './admin/admin.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { UpdateTicketComponent } from './update-ticket/update-ticket.component';
+import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
+import { TicketsOpenedDeveloperComponent } from './tickets-opened-developer/tickets-opened-developer.component';
+import { TicketsCanceledDeveloperComponent } from './tickets-canceled-developer/tickets-canceled-developer.component';
+import { TicketsResolvedDeveloperComponent } from './tickets-resolved-developer/tickets-resolved-developer.component';
+import { DeveloperStatisticsComponent } from './developer-statistics/developer-statistics.component';
+import { TicketsInProgressdDeveloperComponent } from './tickets-in-progressd-developer/tickets-in-progressd-developer.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -22,13 +28,19 @@ const routes: Routes = [
   { path: "forbidden", component: ForbiddenComponent },
   { path: "createDev", component: CreateDevComponent },
   { path: "TicketsAssigne", component: AssignTicketsComponent },
-  { path: 'navbar', component: NavBarComponent },
+  { path: 'navbar-admin', component: NavbarAdminComponent },
   { path: "updatedev", component: UpdateDevComponent },
   { path: 'assign/:id', component: AssignTicketsComponent },
   { path: 'manageUsers', component: ManageUsersComponent, canActivate:[AuthGuard], data:{roles:['ADMIN']} },
   { path: 'assignedTickets', component: TicketsAssignesComponent },
   { path: 'manageUsers/create', component: CreateDevComponent },
-  { path: 'manageUsers/update/:cuid', component: UpdateDevComponent }
+  { path: 'manageUsers/update/:cuid', component: UpdateDevComponent },
+  { path: "updateTicket/:id", component: UpdateTicketComponent },
+  { path: "ticketsOpenedDeveloper", component: TicketsOpenedDeveloperComponent },
+  { path: "ticketsCanceledDeveloper", component: TicketsCanceledDeveloperComponent },
+  { path: "ticketsResolvedDeveloper", component: TicketsResolvedDeveloperComponent },
+  { path: "ticketsInProgressDeveloper", component: TicketsInProgressdDeveloperComponent },
+  { path: "developerStatistics", component: DeveloperStatisticsComponent }
 ];
 
 @NgModule({

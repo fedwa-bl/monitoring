@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { AdminService } from '../_services/admin.service';
 import { OrderPipe } from 'ngx-order-pipe';
 import { UserService } from '../_services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-manage-users',
@@ -82,11 +83,22 @@ export class ManageUsersComponent implements OnInit {
       this.adminService.deleteDev(dev.id).subscribe(
         (data) => {
           this.onGetDevs();
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Compte supprimé',
+            showConfirmButton: false,
+            timer: 1500,
+          });
         },
         (err) => {
           console.log(err);
           if (err.status === 403) {
-            alert('Ce développeur a été assigné à des tickets. ');
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Ce développeur a été assigné à des tickets! ',
+            });
           }
         }
       );

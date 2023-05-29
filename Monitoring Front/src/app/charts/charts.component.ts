@@ -13,7 +13,6 @@ import { UserService } from '../_services/user.service';
 export class ChartsComponent {
   eds: any;
   username: any;
-  selectedOption: string = '';
   months: any;
   message: string = '';
 
@@ -51,6 +50,7 @@ export class ChartsComponent {
     );
     this.generateChart3();
   }
+
   generateChart1() {
     const labels = this.eds;
 
@@ -111,6 +111,7 @@ export class ChartsComponent {
       );
     });
   }
+
   generateChart2() {
     const labels = this.username;
     const status = 'RÉSOLU';
@@ -194,7 +195,7 @@ export class ChartsComponent {
                 labels: labels,
                 datasets: [
                   {
-                    label: 'nb de tickets résolus par développeur',
+                    label: 'nb de tickets en cours de traitement',
                     data: ticketCounts,
                     backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
@@ -304,11 +305,6 @@ export class ChartsComponent {
     });
   }
 
-  onOptionSelected(event: Event) {
-    const target = event.target as HTMLInputElement;
-    this.selectedOption = target.value;
-    console.log(this.selectedOption);
-  }
   download() {
     const chartCanvas = this.chartElement.nativeElement;
     html2canvas(chartCanvas).then((canvas) => {
