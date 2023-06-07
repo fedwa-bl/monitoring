@@ -16,23 +16,5 @@ public class TicketRequest {
     private String status;
     private String comment;
     private Date date_fin;
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public String getComment() {
-		return comment;
-	}
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-	public Date getDate_fin() {
-		return date_fin;
-	}
-	public void setDate_fin(Date date_fin) {
-		this.date_fin = date_fin;
-	}
     
 }

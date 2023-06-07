@@ -48,8 +48,8 @@ public class MonitoringTicketsIncidentsApplication {
         			,"ALAOUI.Mohamed@sofrecom.com",	"MATDEV02",false, new ArrayList<>()));
         	accountService.addNewUser(new Developpeur("HADI","Fadi","0639375740","fhadi","TEMP_Pwd04"
 					,"HADI.Fadi@sofrecom.com",	"MATDEV04",false,new ArrayList<>()));     
-        	accountService.addNewUser(new Developpeur("dev1","dev1","0639375740","dev1","TEMP_dev1"
-					,"dev1.dev1@sofrecom.com",	"MATDEV05",false,new ArrayList<>())); 
+        	accountService.addNewUser(new Developpeur("dev","dev","0639375740","dev1","TEMP_dev1"
+					,"dev.dev@sofrecom.com",	"MATDEV05",false,new ArrayList<>())); 
 			
 			//ajouter les roles au utilisateurs
 			accountService.addRoleToUser("dev1","DEVELOPER");
@@ -97,6 +97,16 @@ public class MonitoringTicketsIncidentsApplication {
         	ticket4.setAdmin(admin);
         	ticket4.setClient(c2);
         	adminService.ajouterTicket(ticket4);
+        	Ticket ticket5=new Ticket(Criticite.NON_URGENT, "this is a test", Status.EN_ATTENTE);
+        	ticket5.setApplication(application2);
+        	ticket5.setAdmin(admin);
+        	ticket5.setClient(c2);
+        	adminService.ajouterTicket(ticket5);
+        	Ticket ticket6=new Ticket(Criticite.NON_URGENT, "this is a test", Status.EN_ATTENTE);
+        	ticket6.setApplication(application2);
+        	ticket6.setAdmin(admin);
+        	ticket6.setClient(c2);
+        	adminService.ajouterTicket(ticket6);
         	
         };
         }

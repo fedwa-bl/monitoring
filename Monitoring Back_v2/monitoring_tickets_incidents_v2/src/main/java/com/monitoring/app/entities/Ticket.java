@@ -57,22 +57,6 @@ public class Ticket {
 	private Client client;
 	private int durée=15;
 
-	
-	public int getDurée() {
-		return durée;
-	}
-
-	public void setDurée(int durée) {
-		this.durée = durée;
-	}
-
-	public Client getClient() {
-		return client;
-	}
-
-	public void setClient(Client client) {
-		this.client = client;
-	}
 
 	public Ticket(Criticite criticite, String description,String commentaire, Status status, Date date_creation,
 			Date date_fin, Developpeur developpeur, Application application, Duration duration) {
@@ -108,22 +92,7 @@ public class Ticket {
 	public enum Status{
 		EN_ATTENTE,RÉSOLU, OUVERT, ANNULÉ, EN_COURS
 	}
-	/*public enum Status {
-	    EN_ATTENTE("En Attente"),
-	    RÉSOLU("Résolu"),
-	    OUVERT("Ouvert"),
-	    ANNULÉ("Annulé");
-	    
-	    private final String label;
-	    
-	    private Status(String label) {
-	        this.label = label;
-	    }
-	    
-	    public String toString() {
-	        return label;
-	    }
-	}*/
+
 	public enum Criticite{
 		URGENT,CRITIQUE,NORMAL,NON_URGENT
 	}

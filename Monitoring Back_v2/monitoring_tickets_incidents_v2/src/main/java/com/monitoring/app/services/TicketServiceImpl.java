@@ -3,6 +3,7 @@ package com.monitoring.app.services;
 import java.sql.Time;
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 
@@ -79,5 +80,8 @@ public class TicketServiceImpl implements TicketService{
 	    }
 	}
 	
-	
+	public List<Object[]> getStatusCountsByMonth(Long developerId) {
+	    return ticketRepo.countTicketsByStatusAndMonthForDeveloper(developerId);
+	}
+
 }

@@ -290,6 +290,10 @@ public class TicketController {
 	    return ResponseEntity.ok(jsonString);
 	}
 
+	@GetMapping("/status-counts/month/{developerId}")
+	public List<Object[]> getStatusCountsByMonth(@PathVariable Long developerId) {
+	    return ticketRepo.countTicketsByStatusAndMonthForDeveloper(developerId);
+	}
 
 
 

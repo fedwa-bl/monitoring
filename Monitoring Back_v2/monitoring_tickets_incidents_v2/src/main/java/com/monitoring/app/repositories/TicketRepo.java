@@ -38,6 +38,13 @@ public interface TicketRepo extends JpaRepository<Ticket, Long>{
 	int countByStatus(@Param("status") Status status);
 	@Query("select count(*) from Ticket t where MONTH(t.date_creation) = :mois")
 	int countBySemester(@Param("mois") int mois);
-
+	@Query("SELECT FUNCTION('MONTH', t.date_creation), t.status, COUNT(t) FROM Ticket t WHERE t.developpeur.id = :developerId AND t.status IN ('RESOLU', 'ANNULE', 'EN_COURS', 'OUVERT') GROUP BY FUNCTION('MONTH', t.date_creation), t.status")
+	List<Object[]> countTicketsByStatusAndMonthForDeveloper(@Param("developerId") Long developerId);
+	@Query("SELECT COUNT(*) FROM Ticket t WHERE t.status='EN_ATTENTE' and DATE(t.date_creation) = CURDATE()")
+	int countByDay();
+	@Query("SELECT COUNT(*) FROM Ticket t WHERE t.status='EN_COURS' and DATE(t.date_creation) = CURDATE()")
+	int countByDayInProgress();
+	@Query("SELECT COUNT(*) FROM Ticket t WHERE t.status='OUVERT' AND t.developpeur.id = :developerId AND DATE(t.date_creation) = CURDATE()")
+	int countByDayDev(@Param("developerId") Long developerId);
 
 }

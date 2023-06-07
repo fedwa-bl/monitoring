@@ -42,7 +42,8 @@ public class DeveloppeurServiceImp implements DeveloppeurService{
             Status oldStatus = ticket.getStatus();
             
             if (status.equals(Status.RÉSOLU)) {
-                ticket.setDate_resolution(new Date()); // Set the date_fin attribute to the current date
+                ticket.setDate_fin(new Date());
+                ticket.setDate_resolution(new Date());
             }
             else if(status.equals(Status.ANNULÉ)) {
             	ticket.setDate_fin(new Date());

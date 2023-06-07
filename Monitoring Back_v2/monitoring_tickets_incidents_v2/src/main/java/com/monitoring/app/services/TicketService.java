@@ -1,5 +1,6 @@
 package com.monitoring.app.services;
 
+
 import com.monitoring.app.entities.Ticket;
 
 public interface TicketService {

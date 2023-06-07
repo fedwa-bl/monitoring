@@ -156,6 +156,7 @@ public AdminServiceImp(DeveloppeurRepo developpeurRepo,AdminRepo adminRepo,Ticke
 			ticket.setStatus(Status.OUVERT);
 			dev.setNb_tickets_assignes(dev.getNb_tickets_assignes()+1);
 			ticket.setDate_creation(new Date());
+			ticket.setDate_fin(new Date(System.currentTimeMillis() + ticket.getDurée() * 24 * 60 * 60 * 1000));
 			return ticketRepo.save(ticket);
 			
 		}catch(Exception e) {

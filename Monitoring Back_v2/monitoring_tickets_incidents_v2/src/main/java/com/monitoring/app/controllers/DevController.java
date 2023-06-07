@@ -107,6 +107,10 @@ public class DevController {
 	    String comment = request.getComment();
 	    return developpeurService.updateTicket(newStatus, comment, idTick);
 	}
+	@GetMapping("/tickets/count/curDayDev/{id}")
+	public int countTotalTicketsCurDay(@PathVariable("id") Long id) {
+	   return ticketRepo.countByDayDev(id);
+	}
 	
 	/*@PutMapping("/updateStatus/{id_tick}")
 	public ResponseEntity<String> updateDev(@RequestBody Map<String, String> payload, @PathVariable("id_tick") long idTick) {

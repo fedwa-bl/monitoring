@@ -97,6 +97,14 @@ public class AdminController {
 	public int countByEdsAndCurrentMonth(@RequestParam("eds") String eds) {
 	    return ts.countByEdsAndCurrentMonth(eds);
 	}
+	@GetMapping("/tickets/count/curDay")
+	public int countTotalTicketsCurDay() {
+	   return ts.countByDay();
+	}
+	@GetMapping("/tickets/count/curDayInProgress")
+	public int countTotalTicketsCurDayInProgress() {
+	   return ts.countByDayInProgress();
+	}
 	
 	@GetMapping("/username")
 	public List<String> getUsername(){
